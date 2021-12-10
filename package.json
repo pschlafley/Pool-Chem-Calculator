@@ -1,0 +1,19 @@
+{
+  "name": "pool-chem-calculator",
+  "version": "1.0.0",
+  "description": "Calculator that calculates pool water chemistry based off values in a form",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pschlafley/Pool-Chem-Calculator.git"
+  },
+  "author": "Peyton Schlafley, Tom Chestnut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pschlafley/Pool-Chem-Calculator/issues"
+  },
+  "homepage": "https://github.com/pschlafley/Pool-Chem-Calculator#readme"
+}
