@@ -27,4 +27,4 @@ const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
 };
 
 
-calculateTotalAlkalinity(50000, 60);
+calculateTotalAlkalinity(30000, 70);
