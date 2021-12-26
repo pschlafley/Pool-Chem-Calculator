@@ -19,4 +19,4 @@ const calculatePoolSalt = (poolGallons, currentSalt) => {
     return SALT_TO_ADD;
 };
 
-calculatePoolSalt(6000, 2600);
+calculatePoolSalt(20000, 3000);
