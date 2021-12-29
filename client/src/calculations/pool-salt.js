@@ -1,8 +1,6 @@
 const calculatePoolSalt = (poolGallons = 10000, currentSalt = 3200) => {
-	// 1 lb of salt to 1,000 gallons of water to increase salt residual 120 ppm.
-
 	const TARGET_PPM = 3200;
-	let poundsPer10000 = 8; // variable for the amount of salt to add per 1000 gallons of water
+	let poundsPer10000 = 8; // variable for the amount of salt to add per 10000 gallons of water
 	let lbsDifference;
 
 	if (poolGallons > 10000) {

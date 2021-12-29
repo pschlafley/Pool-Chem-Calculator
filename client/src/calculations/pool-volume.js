@@ -33,14 +33,14 @@ const calculatePoolVol = (poolType) => {
 };
 
 
-// const rectangleVolume = calculatePoolVol('rectangular');
-// rectangleVolume.calculateVol(30, 20, 2, 10);
+const rectangleVolume = calculatePoolVol('rectangular');
+rectangleVolume.calculateVol(30, 20, 2, 10);
 
-// const circularVolume = calculatePoolVol('circular');
-// circularVolume.calculateCirVol(30, 5);
+const circularVolume = calculatePoolVol('circular');
+circularVolume.calculateCirVol(30, 5);
 
-// const ovalVolume = calculatePoolVol('Oval');
-// ovalVolume.calculateOvalVol(30, 20, 5, 10);
+const ovalVolume = calculatePoolVol('Oval');
+ovalVolume.calculateOvalVol(30, 20, 5, 10);
 
-// const oblongVolume = calculatePoolVol('oblong');
-// oblongVolume.calculateOblongVol(40, 20, 15, 5, 10);
+const oblongVolume = calculatePoolVol('oblong');
+oblongVolume.calculateOblongVol(40, 20, 15, 5, 10);
