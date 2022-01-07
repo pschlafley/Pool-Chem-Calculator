@@ -4,6 +4,7 @@
 	"description": "Calculator that calculates pool water chemistry based off values in a form",
 	"main": "server.js",
 	"scripts": {
+		"start": "cd client && npm start",
 		"test": "cd client && npm run test"
 	},
 	"repository": {
