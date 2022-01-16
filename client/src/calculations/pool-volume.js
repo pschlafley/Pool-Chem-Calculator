@@ -1,26 +1,39 @@
 const POOL_SHAPES = {
-	rectanguler: 'rectangular',
-	circular: 'circular',
-	oval: 'oval',
-	oblong: 'oblong',
+	rectanguler: 'Rectangular',
+	circular: 'Circular',
+	oval: 'Oval',
+	oblong: 'Oblong',
 };
+
+const POOL_MEASUREMENTS = {
+	len: 'Length',
+	width: 'Width',
+	lWidth: 'lWidth',
+	sWidth: 'sWidth',
+	sDepth: 'sDepth',
+	dDepth: 'dDepth',
+	diamter: 'Diameter',
+};
+
+const { lWidth, len, width, sDepth, sWidth, dDepth, diamter } =
+	POOL_MEASUREMENTS;
 
 export const POOL_TYPES = [
 	{
-		id: 'rect',
-		label: 'Rectangle',
+		label: POOL_SHAPES.rectanguler,
+		measurements: { len, width, sDepth, dDepth },
 	},
 	{
-		id: 'circle',
-		label: 'Circle',
+		label: POOL_SHAPES.circular,
+		measurements: { diamter, sDepth },
 	},
 	{
-		id: 'oval',
-		label: 'Oval',
+		label: POOL_SHAPES.oval,
+		measurements: { len, width, sDepth, dDepth },
 	},
 	{
-		id: 'oblong',
-		label: 'Oblong',
+		label: POOL_SHAPES.oblong,
+		measurements: { len, lWidth, sWidth, sDepth, dDepth },
 	},
 ];
 
@@ -32,21 +45,18 @@ const calculatePoolVol = poolType => {
 			const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
 			const VOLUME_IN_GALLONS =
 				len * width * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT;
-			console.log(VOLUME_IN_GALLONS);
 			return VOLUME_IN_GALLONS;
 		},
 		[POOL_SHAPES.circular]: function (diameter, sDepth) {
 			let radius = diameter / 2;
 			const AREA = Math.round(Math.PI * Math.pow(radius, 2));
 			const VOLUME = Math.round(AREA * sDepth * GALLONS_PER_CUBIC_FOOT);
-			console.log(VOLUME);
 			return VOLUME;
 		},
 		[POOL_SHAPES.oval]: function (len, width, sDepth, dDepth) {
 			const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
 			const AREA = (len * width * Math.PI) / 4;
 			const VOLUME = Math.round(AREA * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT);
-			console.log(VOLUME);
 			return VOLUME;
 		},
 		[POOL_SHAPES.oblong]: function (len, lWidth, sWidth, sDepth, dDepth) {
@@ -55,7 +65,6 @@ const calculatePoolVol = poolType => {
 			const VOLUME = Math.round(
 				len * TOTAL_WIDTH * 0.45 * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT
 			);
-			console.log(VOLUME);
 			return VOLUME;
 		},
 	};
