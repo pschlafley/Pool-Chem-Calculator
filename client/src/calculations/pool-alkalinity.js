@@ -23,7 +23,7 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
 	// in this case it will be 22.5 lbs of baking soda.
 	const totalPoundsToAdd = bakingSodaToAdd * alk;
 	// console.log(totalPoundsToAdd)
-	return totalPoundsToAdd;
+	return totalPoundsToAdd.toFixed(1);
 };
 
 calculateTotalAlkalinity(30000, 70);

@@ -1,71 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 
-import {
-	POOL_TYPES,
-	rectangleVolume,
-	circularVolume,
-	ovalVolume,
-	oblongVolume,
-} from '../../../calculations/pool-volume';
 import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
 import styles from './AlkalinityForm.module.css';
 
 const AlkalinityForm = () => {
+	const [alkNeeded, setAlkNeeded] = useState(null);
+
 	const initialValues = {
-		gallons: 0,
+		gallons: 10_000,
 		alkalinity: 100, // measured in PPM
-		poolType: '',
 	};
 
-	// TODO - add in validation schema
+	const schema = yup.object().shape({
+		gallons: yup.number().required(),
+		alkalinity: yup.number().required(),
+	});
 
-	const handleCalculateAlk = values => {
-		console.log(values);
+	const handleCalculateAlk = ({ gallons, alkalinity }) => {
+		const poundsAlkNeeded = calculateTotalAlkalinity(gallons, alkalinity);
+		setAlkNeeded(poundsAlkNeeded);
 	};
-
-	// TODO - add in conditional inputs based on pool type selected
 
 	return (
-		<Formik initialValues={initialValues} onSubmit={handleCalculateAlk}>
-			{({ values, handleChange, handleSubmit, dirty, isValid, errors }) => (
+		<Formik
+			initialValues={initialValues}
+			onSubmit={handleCalculateAlk}
+			validationSchema={schema}
+		>
+			{({ handleChange, handleSubmit, dirty, isValid }) => (
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<h2>Calculate Alkalinity Needed</h2>
-					<div className={styles.inputs}>
-						<div>
-							<label htmlFor='poolType'>Pool Type: </label>
-							<select
-								name='poolType'
-								id='poolType'
-								defaultValue={'Select a Pool Type'}
-								onChange={handleChange}
-							>
-								<option value='' hidden>
-									Select a Pool Type
-								</option>
-								{POOL_TYPES.map(({ label }) => {
-									return (
-										<option key={label} value={label}>
-											{label}
-										</option>
-									);
-								})}
-							</select>
-						</div>
 
+					{alkNeeded && (
+						<div className={styles.resultContainer}>
+							<p>Total Baking Soda to Add:</p>
+							<p className={styles.result}>{alkNeeded}</p>
+						</div>
+					)}
+
+					<div className={styles.inputs}>
 						<div>
 							<label htmlFor='gallons'>Pool Gallons: </label>
 							<input
 								type='number'
 								name='gallons'
-								value={values.gallons}
+								placeholder='Enter Gallons'
 								onChange={handleChange}
 							/>
 						</div>
 
 						<div>
-							<label htmlFor='alkalinity'>Current Alkalinity: </label>
-							<input type='number' name='alkalinity' onChange={handleChange} />
+							<label htmlFor='alkalinity'>Current Alkalinity (in PPM): </label>
+							<input
+								type='number'
+								name='alkalinity'
+								onChange={handleChange}
+								placeholder='Enter Alkalinity'
+							/>
 						</div>
 
 						<button
