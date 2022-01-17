@@ -39,7 +39,7 @@ const AlkalinityForm = () => {
           {alkNeeded && (
             <div className={styles.resultContainer}>
               <p>Total Baking Soda to Add:</p>
-              <p className={styles.result}>{alkNeeded}</p>
+              <p className={styles.result}>{alkNeeded} lbs</p>
             </div>
           )}
 
