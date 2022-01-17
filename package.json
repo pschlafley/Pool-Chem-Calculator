@@ -5,7 +5,8 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "cd client && npm start",
-		"test": "cd client && npm run test"
+		"test": "cd client && npm run test",
+		"lint": "npx eslint client/src"
 	},
 	"repository": {
 		"type": "git",
@@ -19,6 +20,8 @@
 	"homepage": "https://github.com/pschlafley/Pool-Chem-Calculator#readme",
 	"devDependencies": {
 		"eslint": "^8.7.0",
-		"eslint-plugin-react": "^7.28.0"
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-react": "^7.28.0",
+		"prettier": "^2.5.1"
 	}
 }
