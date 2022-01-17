@@ -3,6 +3,13 @@
 // total alkalinity levels should be between 100 - 150 ppm (parts per million)
 
 export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
+  // if alkalinty level in pool is greater than 120, than we want to lower it by adding muriatic acid which will also affect the ph levels
+  if (alkalinityInPool > 120) {
+    // (myperfectpool.com) says that we will need approximately 35-60 fl oz of muriatic acid per 10,000 gals of water 
+    // in order to reduce alkalinity by 10 ppm
+    console.log((35 + 60) / 2);
+  }
+
   // determine how much pounds of baking soda to use per gallon
   const baseMultiplier = 1.5;
 
@@ -26,4 +33,4 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
   return totalPoundsToAdd <= 0 ? 0 : totalPoundsToAdd.toFixed(1);
 };
 
-calculateTotalAlkalinity(30000, 70);
+calculateTotalAlkalinity(30000, 140);
