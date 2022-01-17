@@ -7,7 +7,8 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
   if (alkalinityInPool > 120) {
     // (myperfectpool.com) says that we will need approximately 35-60 fl oz of muriatic acid per 10,000 gals of water 
     // in order to reduce alkalinity by 10 ppm
-    console.log((35 + 60) / 2);
+    const Avg_floz = 45;
+
   }
 
   // determine how much pounds of baking soda to use per gallon
