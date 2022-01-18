@@ -2,28 +2,40 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
+import {
+  calculateTotalAlkalinity,
+  UNITS,
+  CHEMICALS,
+} from '../../../calculations/pool-alkalinity';
 import styles from './AlkalinityForm.module.css';
 
+const initialState = {
+  chemical: null,
+  unit: null,
+};
+
+const initialValues = {
+  gallons: 0,
+  alkalinity: 0, // measured in PPM
+};
+
+const schema = yup.object().shape({
+  gallons: yup.number().required(),
+  alkalinity: yup.number().required(),
+});
+
 const AlkalinityForm = () => {
-  const [alkNeeded, setAlkNeeded] = useState(null);
-
-  const initialValues = {
-    gallons: 0,
-    alkalinity: 0, // measured in PPM
-  };
-
-  const schema = yup.object().shape({
-    gallons: yup.number().required(),
-    alkalinity: yup.number().required(),
-  });
+  const [chemicalNeeded, setChemicalNeeded] = useState(initialState);
 
   const handleCalculateAlk = ({ gallons, alkalinity }) => {
-    const poundsAlkNeeded = calculateTotalAlkalinity(gallons, alkalinity);
-    console.log('poundsAlkNeeded:', poundsAlkNeeded);
-    const formattedResult =
-      poundsAlkNeeded <= 0 ? 'None' : Math.abs(poundsAlkNeeded);
-    setAlkNeeded(formattedResult);
+    const amountNeeded = calculateTotalAlkalinity(gallons, alkalinity);
+    const doesNeedAcid = alkalinity > 120;
+    const unit = doesNeedAcid ? UNITS.fluidOunce : UNITS.pounds;
+    const formattedResult = `${Math.abs(amountNeeded)} ${unit}`;
+    setChemicalNeeded({
+      chemical: doesNeedAcid ? CHEMICALS.acid.label : CHEMICALS.base.label,
+      result: formattedResult,
+    });
   };
 
   return (
@@ -36,10 +48,10 @@ const AlkalinityForm = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Calculate Alkalinity Needed</h2>
 
-          {alkNeeded && (
+          {chemicalNeeded.result && (
             <div className={styles.resultContainer}>
-              <p>Total Baking Soda to Add:</p>
-              <p className={styles.result}>{alkNeeded} lbs</p>
+              <p>Total {chemicalNeeded.chemical} to Add:</p>
+              <p className={styles.result}>{chemicalNeeded.result}</p>
             </div>
           )}
 

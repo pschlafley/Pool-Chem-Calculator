@@ -27,3 +27,19 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
 };
 
 calculateTotalAlkalinity(30000, 70);
+
+export const UNITS = {
+  pounds: 'lbs',
+  fluidOunce: 'fl oz',
+};
+
+export const CHEMICALS = {
+  base: {
+    label: 'Baking Soda',
+    unit: UNITS.pounds,
+  },
+  acid: {
+    label: 'Muriatic Acid',
+    unit: UNITS.fluidOunce,
+  },
+};
