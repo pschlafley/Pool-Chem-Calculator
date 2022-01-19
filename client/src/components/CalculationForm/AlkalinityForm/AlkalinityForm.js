@@ -29,9 +29,16 @@ const AlkalinityForm = () => {
 
   const handleCalculateAlk = ({ gallons, alkalinity }) => {
     const amountNeeded = calculateTotalAlkalinity(gallons, alkalinity);
+    console.log(`amountNedded ${amountNeeded}`);
     const doesNeedAcid = alkalinity > 120;
-    const unit = doesNeedAcid ? UNITS.fluidOunce : UNITS.pounds;
-    const formattedResult = `${Math.abs(amountNeeded)} ${unit}`;
+    const quarts = amountNeeded > 32;
+
+    const unit = !doesNeedAcid ? UNITS.pounds : quarts ? UNITS.quarts : UNITS.fluidOunce;
+
+    // const unit = doesNeedAcid ? UNITS.fluidOunce : UNITS.pounds;
+
+    const formattedResult = quarts ? `${amountNeeded / 32} ${unit}` : `${amountNeeded} ${unit}`;
+    // const formattedResult = `${Math.abs(amountNeeded)} ${unit}`;
     setChemicalNeeded({
       chemical: doesNeedAcid ? CHEMICALS.acid.label : CHEMICALS.base.label,
       result: formattedResult,
