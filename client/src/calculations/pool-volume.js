@@ -1,46 +1,87 @@
-const calculatePoolVol = (poolType) => {
-    const GALLONS_PER_CUBIC_FOOT = 7.48;
-
-    return {
-        calculateVol: function (len, width, sDepth, dDepth) {
-            const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
-            const VOLUME_IN_GALLONS = len * width * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT;
-            console.log(VOLUME_IN_GALLONS);
-            return VOLUME_IN_GALLONS;
-        },
-        calculateCirVol: function (diameter, sDepth) {
-            let radius = diameter / 2;
-            const AREA = Math.round(Math.PI * Math.pow(radius, 2));
-            const VOLUME = Math.round(AREA * sDepth * GALLONS_PER_CUBIC_FOOT);
-            console.log(VOLUME)
-            return VOLUME;
-        },
-        calculateOvalVol: function (len, width, sDepth, dDepth) {
-            const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
-            const AREA = len * width * Math.PI / 4;
-            const VOLUME = Math.round(AREA * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT);
-            console.log(VOLUME);
-            return VOLUME;
-        },
-        calculateOblongVol: function (len, lWidth, sWidth, sDepth, dDepth) {
-            const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
-            const TOTAL_WIDTH = lWidth + sWidth;
-            const VOLUME = Math.round(len * TOTAL_WIDTH * .45 * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT);
-            console.log(VOLUME);
-            return VOLUME;
-        }
-    }
+const POOL_SHAPES = {
+	rectanguler: 'Rectangular',
+	circular: 'Circular',
+	oval: 'Oval',
+	oblong: 'Oblong',
 };
 
+const POOL_MEASUREMENTS = {
+	len: 'Length',
+	width: 'Width',
+	lWidth: 'lWidth',
+	sWidth: 'sWidth',
+	sDepth: 'sDepth',
+	dDepth: 'dDepth',
+	diamter: 'Diameter',
+};
 
-const rectangleVolume = calculatePoolVol('rectangular');
-rectangleVolume.calculateVol(30, 20, 2, 10);
+const { lWidth, len, width, sDepth, sWidth, dDepth, diamter } =
+	POOL_MEASUREMENTS;
 
-const circularVolume = calculatePoolVol('circular');
-circularVolume.calculateCirVol(30, 5);
+export const POOL_TYPES = [
+	{
+		label: POOL_SHAPES.rectanguler,
+		measurements: { len, width, sDepth, dDepth },
+	},
+	{
+		label: POOL_SHAPES.circular,
+		measurements: { diamter, sDepth },
+	},
+	{
+		label: POOL_SHAPES.oval,
+		measurements: { len, width, sDepth, dDepth },
+	},
+	{
+		label: POOL_SHAPES.oblong,
+		measurements: { len, lWidth, sWidth, sDepth, dDepth },
+	},
+];
 
-const ovalVolume = calculatePoolVol('Oval');
-ovalVolume.calculateOvalVol(30, 20, 5, 10);
+const calculatePoolVol = poolType => {
+	const GALLONS_PER_CUBIC_FOOT = 7.48;
 
-const oblongVolume = calculatePoolVol('oblong');
-oblongVolume.calculateOblongVol(40, 20, 15, 5, 10);
+	const volumeCalcs = {
+		[POOL_SHAPES.rectanguler]: function (len, width, sDepth, dDepth) {
+			const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
+			const VOLUME_IN_GALLONS =
+				len * width * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT;
+			return VOLUME_IN_GALLONS;
+		},
+		[POOL_SHAPES.circular]: function (diameter, sDepth) {
+			let radius = diameter / 2;
+			const AREA = Math.round(Math.PI * Math.pow(radius, 2));
+			const VOLUME = Math.round(AREA * sDepth * GALLONS_PER_CUBIC_FOOT);
+			return VOLUME;
+		},
+		[POOL_SHAPES.oval]: function (len, width, sDepth, dDepth) {
+			const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
+			const AREA = (len * width * Math.PI) / 4;
+			const VOLUME = Math.round(AREA * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT);
+			return VOLUME;
+		},
+		[POOL_SHAPES.oblong]: function (len, lWidth, sWidth, sDepth, dDepth) {
+			const AVERAGE_DEPTH = (sDepth + dDepth) / 2;
+			const TOTAL_WIDTH = lWidth + sWidth;
+			const VOLUME = Math.round(
+				len * TOTAL_WIDTH * 0.45 * AVERAGE_DEPTH * GALLONS_PER_CUBIC_FOOT
+			);
+			return VOLUME;
+		},
+	};
+
+	return volumeCalcs[poolType];
+};
+
+export const calculateRectangleVolume = calculatePoolVol(
+	POOL_SHAPES.rectanguler
+);
+calculateRectangleVolume(30, 20, 2, 10);
+
+export const calculateCircularVolume = calculatePoolVol(POOL_SHAPES.circular);
+calculateCircularVolume(30, 5);
+
+export const calculateOvalVolume = calculatePoolVol(POOL_SHAPES.oval);
+calculateOvalVolume(30, 20, 5, 10);
+
+export const calculateOblongVolume = calculatePoolVol(POOL_SHAPES.oblong);
+calculateOblongVolume(40, 20, 15, 5, 10);
