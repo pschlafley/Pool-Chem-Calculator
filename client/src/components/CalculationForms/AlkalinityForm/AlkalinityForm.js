@@ -7,7 +7,7 @@ import {
   UNITS,
   CHEMICALS,
 } from '../../../calculations/pool-alkalinity';
-import styles from './AlkalinityForm.module.css';
+import styles from '../Form.module.css';
 
 const initialState = {
   chemical: null,
@@ -33,12 +33,15 @@ const AlkalinityForm = () => {
     const doesNeedAcid = alkalinity > 120;
     const quarts = amountNeeded > 32;
 
-    const unit = !doesNeedAcid ? UNITS.pounds : quarts ? UNITS.quarts : UNITS.fluidOunce;
+    const unit = !doesNeedAcid
+      ? UNITS.pounds
+      : quarts
+      ? UNITS.quarts
+      : UNITS.fluidOunce;
 
-    // const unit = doesNeedAcid ? UNITS.fluidOunce : UNITS.pounds;
-
-    const formattedResult = quarts ? `${amountNeeded / 32} ${unit}` : `${amountNeeded} ${unit}`;
-    // const formattedResult = `${Math.abs(amountNeeded)} ${unit}`;
+    const formattedResult = quarts
+      ? `${Math.abs(amountNeeded) / 32} ${unit}`
+      : `${Math.abs(amountNeeded)} ${unit}`;
     setChemicalNeeded({
       chemical: doesNeedAcid ? CHEMICALS.acid.label : CHEMICALS.base.label,
       result: formattedResult,
