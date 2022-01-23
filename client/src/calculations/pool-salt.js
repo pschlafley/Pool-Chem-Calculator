@@ -24,5 +24,5 @@ export const calculatePoolSalt = (
 
   const saltToAdd = poundsPer10000 * amountPpmNeeded;
 
-  return currentSalt >= TARGET_PPM ? 0 : saltToAdd.toFixed(1);
+  return currentSalt >= TARGET_PPM ? 0 : Number(saltToAdd.toFixed(1));
 };
