@@ -5,7 +5,7 @@ import SaltForm from './components/CalculationForms/SaltForm/SaltForm';
 function App() {
   return (
     <div className='App'>
-      <AlkalinityForm />
+      {/* <AlkalinityForm /> */}
       <SaltForm />
     </div>
   );
