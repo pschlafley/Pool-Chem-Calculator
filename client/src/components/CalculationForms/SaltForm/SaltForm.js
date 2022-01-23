@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { calculatePoolSalt } from '../../../calculations/pool-salt';
+import { UNITS } from '../../../constants';
 import styles from '../Form.module.css';
 
 const initialValues = {
-  gallons: 0,
-  salt: 0,
+  gallons: '',
+  salt: '',
 };
 
 const schema = yup.object().shape({
@@ -16,20 +17,34 @@ const schema = yup.object().shape({
 });
 
 const SaltForm = () => {
-  // TODO - finish handlesubmit using calculatepoolsalt function to get the result
-  const handleSubmit = () => {};
+  const [saltNeeded, setSaltNeeded] = useState(null);
+
+  const handleCalculateSalt = ({ gallons, salt }, resetForm) => {
+    const amountNeeded = Math.abs(calculatePoolSalt(gallons, salt));
+    setSaltNeeded(amountNeeded);
+    resetForm({ values: initialValues });
+  };
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={(values, { resetForm }) =>
+        handleCalculateSalt(values, resetForm)
+      }
       validationSchema={schema}
     >
-      {({ handleChange, handleSubmit, dirty, isValid }) => (
+      {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>Calculate Salt To Add</h2>
+          <h2>Calculate Salt Needed</h2>
 
-          {/* TODO - add in the calculation result */}
+          {saltNeeded && (
+            <div className={styles.resultContainer}>
+              <p>Total Salt to Add:</p>
+              <p className={styles.result}>
+                {saltNeeded} {UNITS.pounds}
+              </p>
+            </div>
+          )}
 
           <div className={styles.inputs}>
             <div>
@@ -39,6 +54,7 @@ const SaltForm = () => {
                 name='gallons'
                 placeholder='Enter Gallons'
                 onChange={handleChange}
+                value={values.gallons}
               />
             </div>
 
@@ -49,6 +65,7 @@ const SaltForm = () => {
                 name='salt'
                 placeholder='Enter Current Salt'
                 onChange={handleChange}
+                value={values.salt}
               />
             </div>
 
