@@ -14,3 +14,10 @@ export const CHEMICALS = {
     unit: UNITS.fluidOunce,
   },
 };
+
+export const FORM_VALUES = {
+  alk: {
+    header: 'Calculate Alkalinity Needed',
+    resultLabel: 'Alkalinity',
+  },
+};

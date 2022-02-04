@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import Form from '../../Form/Form';
+
 import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
-import { UNITS, CHEMICALS } from '../../../constants';
+import { UNITS, CHEMICALS, HEADERS, FORM_VALUES } from '../../../constants';
 import styles from '../Form.module.css';
+
+const { header, resultLabel } = FORM_VALUES.alk;
 
 const initialState = {
   chemical: null,
@@ -56,48 +60,42 @@ const AlkalinityForm = () => {
       validationSchema={schema}
     >
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>Calculate Alkalinity Needed</h2>
-
-          {chemicalNeeded.result && (
-            <div className={styles.resultContainer}>
-              <p>Total {chemicalNeeded.chemical} to Add:</p>
-              <p className={styles.result}>{chemicalNeeded.result}</p>
-            </div>
-          )}
-
-          <div className={styles.inputs}>
-            <div>
-              <label htmlFor='gallons'>Pool Gallons: </label>
-              <input
-                type='number'
-                name='gallons'
-                placeholder='Enter Gallons'
-                onChange={handleChange}
-                value={values.gallons}
-              />
-            </div>
-
-            <div>
-              <label htmlFor='alkalinity'>Current Alkalinity (in PPM): </label>
-              <input
-                type='number'
-                name='alkalinity'
-                onChange={handleChange}
-                placeholder='Enter Alkalinity'
-                value={values.alkalinity}
-              />
-            </div>
-
-            <button
-              type='submit'
-              disabled={!dirty || !isValid}
-              className={styles.button}
-            >
-              Calculate
-            </button>
+        <Form
+          onFormSubmit={handleSubmit}
+          header={header}
+          result={chemicalNeeded.result}
+          type={resultLabel}
+        >
+          <div>
+            <label htmlFor='gallons'>Pool Gallons: </label>
+            <input
+              type='number'
+              name='gallons'
+              placeholder='Enter Gallons'
+              onChange={handleChange}
+              value={values.gallons}
+            />
           </div>
-        </form>
+
+          <div>
+            <label htmlFor='alkalinity'>Current Alkalinity (in PPM): </label>
+            <input
+              type='number'
+              name='alkalinity'
+              onChange={handleChange}
+              placeholder='Enter Alkalinity'
+              value={values.alkalinity}
+            />
+          </div>
+
+          <button
+            type='submit'
+            disabled={!dirty || !isValid}
+            className={styles.button}
+          >
+            Calculate
+          </button>
+        </Form>
       )}
     </Formik>
   );
