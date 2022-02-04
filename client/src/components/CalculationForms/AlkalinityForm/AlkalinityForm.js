@@ -4,10 +4,10 @@ import * as yup from 'yup';
 
 import Form from '../../Form/Form';
 import Input from '../../Form/Input';
+import Button from '../../Form/Button';
 
 import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
 import { UNITS, CHEMICALS, FORM_VALUES } from '../../../constants';
-import styles from '../Form.module.css';
 
 const { header, placeholders, inputNames, inputLabels } = FORM_VALUES.alk;
 
@@ -66,6 +66,7 @@ const AlkalinityForm = () => {
           result={chemicalNeeded.result}
           type={chemicalNeeded.chemical}
         >
+          {/* TODO - map through ALK_INPUT array to generate inputs */}
           <Input
             name={inputNames[0]}
             label={inputLabels[0]}
@@ -81,13 +82,10 @@ const AlkalinityForm = () => {
             value={values.alkalinity}
           />
 
-          <button
-            type='submit'
-            disabled={!dirty || !isValid}
-            className={styles.button}
-          >
-            Calculate
-          </button>
+          <Button
+            label={FORM_VALUES.buttons.calculate}
+            isDisabled={!dirty || !isValid}
+          />
         </Form>
       )}
     </Formik>

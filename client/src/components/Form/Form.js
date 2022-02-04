@@ -8,20 +8,22 @@ const Form = ({
   onFormSubmit = null,
   result,
   children = null,
-}) => (
-  <form className={styles.form} onSubmit={onFormSubmit}>
-    <h2>{header}</h2>
+}) => {
+  const renderResult = () => (
+    <div className={styles.resultContainer}>
+      <p>Total {type} to Add:</p>
+      <p className={styles.result}>{result}</p>
+    </div>
+  );
 
-    {result ? (
-      <div className={styles.resultContainer}>
-        <p>Total {type} to Add:</p>
-        <p className={styles.result}>{result}</p>
-      </div>
-    ) : null}
-
-    <div className={styles.inputs}>{children}</div>
-  </form>
-);
+  return (
+    <form className={styles.form} onSubmit={onFormSubmit}>
+      <h2>{header}</h2>
+      {result ? renderResult() : null}
+      <div className={styles.inputs}>{children}</div>
+    </form>
+  );
+};
 
 Form.propTypes = {
   type: PropTypes.string,
