@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import {
-  calculateTotalAlkalinity,
-  UNITS,
-  CHEMICALS,
-} from '../../../calculations/pool-alkalinity';
-import styles from './AlkalinityForm.module.css';
+import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
+import { UNITS, CHEMICALS } from '../../../constants';
+import styles from '../Form.module.css';
 
 const initialState = {
   chemical: null,
@@ -15,8 +12,8 @@ const initialState = {
 };
 
 const initialValues = {
-  gallons: 0,
-  alkalinity: 0, // measured in PPM
+  gallons: '',
+  alkalinity: '', // measured in PPM
 };
 
 const schema = yup.object().shape({
@@ -27,27 +24,37 @@ const schema = yup.object().shape({
 const AlkalinityForm = () => {
   const [chemicalNeeded, setChemicalNeeded] = useState(initialState);
 
-  const handleCalculateAlk = ({ gallons, alkalinity }) => {
+  const handleCalculateAlk = ({ gallons, alkalinity }, resetForm) => {
     const amountNeeded = calculateTotalAlkalinity(gallons, alkalinity);
     const doesNeedAcid = alkalinity > 120;
     const quarts = amountNeeded > 32;
 
-    const unit = !doesNeedAcid ? UNITS.pounds : quarts ? UNITS.quarts : UNITS.fluidOunce;
+    const unit = !doesNeedAcid
+      ? UNITS.pounds
+      : quarts
+        ? UNITS.quarts
+        : UNITS.fluidOunce;
 
-    const formattedResult = quarts ? `${Math.abs(amountNeeded) / 32} ${unit}` : `${amountNeeded} ${unit}`;
+    const formattedResult = quarts
+      ? `${Math.abs(amountNeeded) / 32} ${unit}`
+      : `${Math.abs(amountNeeded)} ${unit}`;
     setChemicalNeeded({
       chemical: doesNeedAcid ? CHEMICALS.acid.label : CHEMICALS.base.label,
       result: formattedResult,
     });
+
+    resetForm({ values: initialValues });
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleCalculateAlk}
+      onSubmit={(values, { resetForm }) =>
+        handleCalculateAlk(values, resetForm)
+      }
       validationSchema={schema}
     >
-      {({ handleChange, handleSubmit, dirty, isValid }) => (
+      {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Calculate Alkalinity Needed</h2>
 
@@ -66,6 +73,7 @@ const AlkalinityForm = () => {
                 name='gallons'
                 placeholder='Enter Gallons'
                 onChange={handleChange}
+                value={values.gallons}
               />
             </div>
 
@@ -76,6 +84,7 @@ const AlkalinityForm = () => {
                 name='alkalinity'
                 onChange={handleChange}
                 placeholder='Enter Alkalinity'
+                value={values.alkalinity}
               />
             </div>
 

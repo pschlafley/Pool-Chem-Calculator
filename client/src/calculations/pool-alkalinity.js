@@ -2,23 +2,6 @@
 // For calculating total Alkalinity in a pool, you will be adding about 1.5 lbs of sodium bicarbonate (baking soda) / per 10,000 gal. of pool water
 // total alkalinity levels should be between 100 - 150 ppm (parts per million)
 
-export const UNITS = {
-  pounds: 'lbs',
-  fluidOunce: 'fl oz',
-  quarts: 'qt'
-};
-
-export const CHEMICALS = {
-  base: {
-    label: 'Baking Soda',
-    unit: UNITS.pounds,
-  },
-  acid: {
-    label: 'Muriatic Acid',
-    unit: UNITS.fluidOunce,
-  },
-};
-
 export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
   // determine how much pounds of baking soda to use per gallon
   const baseMultiplier = 1.5;
@@ -43,7 +26,7 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
 
   // if alkalinty level in pool is greater than 120, than we want to lower it by adding muriatic acid which will also affect the ph levels
   if (alkalinityInPool > 120) {
-    // (myperfectpool.com) says that we will need approximately 35-60 fl oz of muriatic acid per 10,000 gals of water 
+    // (myperfectpool.com) says that we will need approximately 35-60 fl oz of muriatic acid per 10,000 gals of water
     // in order to reduce alkalinity by 10 ppm
     const Avg_floz = (35 + 60) / 2;
     const floz_perGal = gallonsBaseTen * Avg_floz;
@@ -52,8 +35,7 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
     const result = floz_perGal * ppm_to_adjust;
     // there are 32 fl oz in a quart so if result is greater than 32 then we divide that number by 32 to get how many quarts that will be
     return result;
-  };
-
+  }
 
   return totalPoundsToAdd <= 0 ? 0 : totalPoundsToAdd.toFixed(1);
 };

@@ -1,21 +1,28 @@
-const calculatePoolSalt = (poolGallons = 10000, currentSalt = 3200) => {
-	const TARGET_PPM = 3200;
-	let poundsPer10000 = 8; // variable for the amount of salt to add per 10000 gallons of water
-	let lbsDifference;
+const DEFAULT_GALLONS = 10_000;
+const DEFAULT_SALT = 3200;
+const POUNDS_DIVISOR = 1_000;
+const PPM_DIVISOR = 100;
+const INITIAL_POUNDS = 8;
 
-	if (poolGallons > 10000) {
-		lbsDifference = (poolGallons - 10000) / 1000;
-		poundsPer10000 += lbsDifference;
-	} else if (poolGallons < 10000) {
-		lbsDifference = (10000 - poolGallons) / 1000;
-		poundsPer10000 -= lbsDifference;
-	}
+export const calculatePoolSalt = (
+  poolGallons = DEFAULT_GALLONS,
+  currentSalt = DEFAULT_SALT
+) => {
+  const TARGET_PPM = DEFAULT_SALT;
+  let poundsPer10000 = INITIAL_POUNDS; // variable for the amount of salt to add per 10000 gallons of water
+  let lbsDifference;
 
-	const amountPpmNeeded = (3200 - currentSalt) / 100;
+  if (poolGallons > DEFAULT_GALLONS) {
+    lbsDifference = (poolGallons - DEFAULT_GALLONS) / POUNDS_DIVISOR;
+    poundsPer10000 += lbsDifference;
+  } else if (poolGallons < DEFAULT_GALLONS) {
+    lbsDifference = (DEFAULT_GALLONS - poolGallons) / POUNDS_DIVISOR;
+    poundsPer10000 -= lbsDifference;
+  }
 
-	const saltToAdd = poundsPer10000 * amountPpmNeeded;
+  const amountPpmNeeded = (DEFAULT_SALT - currentSalt) / PPM_DIVISOR;
 
-	return currentSalt >= TARGET_PPM ? 0 : saltToAdd;
+  const saltToAdd = poundsPer10000 * amountPpmNeeded;
+
+  return currentSalt >= TARGET_PPM ? 0 : Number(saltToAdd.toFixed(1));
 };
-
-export default calculatePoolSalt;
