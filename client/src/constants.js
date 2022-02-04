@@ -18,6 +18,8 @@ export const CHEMICALS = {
 export const FORM_VALUES = {
   alk: {
     header: 'Calculate Alkalinity Needed',
-    resultLabel: 'Alkalinity',
+    inputLabels: ['Pool Gallons:', 'Current Alkalinity (in PPM):'],
+    placeholders: ['Enter Gallons', 'Enter Alkalinity'],
+    inputNames: ['gallons', 'alkalinity'],
   },
 };

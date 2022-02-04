@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Form.module.css';
 
 const Form = ({
-  type = '', // chemical to be displayed with the result
+  type, // chemical to be displayed with the result
   header = '',
-  onFormSubmit,
+  onFormSubmit = null,
   result,
-  children,
+  children = null,
 }) => (
   <form className={styles.form} onSubmit={onFormSubmit}>
     <h2>{header}</h2>
@@ -18,11 +19,19 @@ const Form = ({
       </div>
     ) : null}
 
-    <div className={styles.inputs}>
-      {/* inputs and submit button will go here */}
-      {children}
-    </div>
+    <div className={styles.inputs}>{children}</div>
   </form>
 );
+
+Form.propTypes = {
+  type: PropTypes.string,
+  header: PropTypes.string.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+  result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
+};
 
 export default Form;

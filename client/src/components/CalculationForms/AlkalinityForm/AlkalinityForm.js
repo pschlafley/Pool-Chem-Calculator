@@ -3,16 +3,17 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Form from '../../Form/Form';
+import Input from '../../Form/Input';
 
 import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
-import { UNITS, CHEMICALS, HEADERS, FORM_VALUES } from '../../../constants';
+import { UNITS, CHEMICALS, FORM_VALUES } from '../../../constants';
 import styles from '../Form.module.css';
 
-const { header, resultLabel } = FORM_VALUES.alk;
+const { header, placeholders, inputNames, inputLabels } = FORM_VALUES.alk;
 
 const initialState = {
   chemical: null,
-  unit: null,
+  result: null,
 };
 
 const initialValues = {
@@ -30,7 +31,6 @@ const AlkalinityForm = () => {
 
   const handleCalculateAlk = ({ gallons, alkalinity }, resetForm) => {
     const amountNeeded = calculateTotalAlkalinity(gallons, alkalinity);
-    console.log(`amountNedded ${amountNeeded}`);
     const doesNeedAcid = alkalinity > 120;
     const quarts = amountNeeded > 32;
 
@@ -54,39 +54,32 @@ const AlkalinityForm = () => {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={schema}
       onSubmit={(values, { resetForm }) =>
         handleCalculateAlk(values, resetForm)
       }
-      validationSchema={schema}
     >
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <Form
           onFormSubmit={handleSubmit}
           header={header}
           result={chemicalNeeded.result}
-          type={resultLabel}
+          type={chemicalNeeded.chemical}
         >
-          <div>
-            <label htmlFor='gallons'>Pool Gallons: </label>
-            <input
-              type='number'
-              name='gallons'
-              placeholder='Enter Gallons'
-              onChange={handleChange}
-              value={values.gallons}
-            />
-          </div>
-
-          <div>
-            <label htmlFor='alkalinity'>Current Alkalinity (in PPM): </label>
-            <input
-              type='number'
-              name='alkalinity'
-              onChange={handleChange}
-              placeholder='Enter Alkalinity'
-              value={values.alkalinity}
-            />
-          </div>
+          <Input
+            name={inputNames[0]}
+            label={inputLabels[0]}
+            placeholder={placeholders[0]}
+            onInputChange={handleChange}
+            value={values.gallons}
+          />
+          <Input
+            name={inputNames[1]}
+            label={inputLabels[1]}
+            placeholder={placeholders[1]}
+            onInputChange={handleChange}
+            value={values.alkalinity}
+          />
 
           <button
             type='submit'
