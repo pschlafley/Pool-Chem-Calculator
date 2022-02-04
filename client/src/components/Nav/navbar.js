@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
+import React from 'react';
 
-
-const navBar = () => {
+const NavBar = () => {
     return (
-        <div></div>
+        <div>
+        </div>
     );
 };
 
-export default navBar;
+export default NavBar;
