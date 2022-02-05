@@ -6,12 +6,10 @@
 }
 
 .listItem {
-    color: rgb(11, 126, 88);
+    color: rgba(0, 0, 0, 0.582);
     text-decoration: none;
 }
 
 .listItem:focus {
-    padding: 4px;
-    color: rgb(41, 39, 39);
-    outline: 3px solid orange;
+    border: 2px solid orange;
 }
