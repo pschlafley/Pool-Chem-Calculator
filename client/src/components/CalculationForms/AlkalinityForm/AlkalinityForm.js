@@ -7,9 +7,7 @@ import Input from '../../Form/Input';
 import Button from '../../Form/Button';
 
 import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
-import { UNITS, CHEMICALS, FORM_VALUES } from '../../../constants';
-
-const { header, placeholders, inputNames, inputLabels } = FORM_VALUES.alk;
+import { UNITS, CHEMICALS, LABELS } from '../../../constants';
 
 const initialState = {
   chemical: null,
@@ -25,6 +23,15 @@ const schema = yup.object().shape({
   gallons: yup.number().required(),
   alkalinity: yup.number().required(),
 });
+
+const INPUTS = [
+  { id: 'gallons', label: 'Pool Gallons:', placeholder: 'Enter Gallons' },
+  {
+    id: 'alkalinity',
+    label: 'Current Alkalinity (in PPM):',
+    placeholder: 'Enter Alkalinity',
+  },
+];
 
 const AlkalinityForm = () => {
   const [chemicalNeeded, setChemicalNeeded] = useState(initialState);
@@ -62,28 +69,23 @@ const AlkalinityForm = () => {
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <Form
           onFormSubmit={handleSubmit}
-          header={header}
+          header={LABELS.alkForm.header}
           result={chemicalNeeded.result}
           type={chemicalNeeded.chemical}
         >
-          {/* TODO - map through ALK_INPUT array to generate inputs */}
-          <Input
-            name={inputNames[0]}
-            label={inputLabels[0]}
-            placeholder={placeholders[0]}
-            onInputChange={handleChange}
-            value={values.gallons}
-          />
-          <Input
-            name={inputNames[1]}
-            label={inputLabels[1]}
-            placeholder={placeholders[1]}
-            onInputChange={handleChange}
-            value={values.alkalinity}
-          />
+          {INPUTS.map(({ id, label, placeholder }) => (
+            <Input
+              key={id}
+              name={id}
+              label={label}
+              placeholder={placeholder}
+              value={values[id]}
+              onInputChange={handleChange}
+            />
+          ))}
 
           <Button
-            label={FORM_VALUES.buttons.calculate}
+            label={LABELS.alkForm.button}
             isDisabled={!dirty || !isValid}
           />
         </Form>

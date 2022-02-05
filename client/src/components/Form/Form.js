@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styles from './Form.module.css';
 
 const Form = ({
@@ -30,10 +31,7 @@ Form.propTypes = {
   header: PropTypes.string.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
   result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Form;

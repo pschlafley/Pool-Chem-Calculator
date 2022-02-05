@@ -15,15 +15,9 @@ export const CHEMICALS = {
   },
 };
 
-// TODO - refactor ALK_INPUT into an array of objects to map through
-export const FORM_VALUES = {
-  alk: {
+export const LABELS = {
+  alkForm: {
     header: 'Calculate Alkalinity Needed',
-    inputLabels: ['Pool Gallons:', 'Current Alkalinity (in PPM):'],
-    placeholders: ['Enter Gallons', 'Enter Alkalinity'],
-    inputNames: ['gallons', 'alkalinity'],
-  },
-  buttons: {
-    calculate: 'Calculate',
+    button: 'Calculate',
   },
 };
