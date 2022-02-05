@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import Form from '../../Form/Form';
+import Input from '../../Form/Input';
+import Button from '../../Form/Button';
+
 import { calculatePoolSalt } from '../../../calculations/pool-salt';
-import { UNITS } from '../../../constants';
-import styles from '../Form.module.css';
+import { CHEMICALS, LABELS } from '../../../constants';
 
 const initialValues = {
   gallons: '',
@@ -15,6 +18,15 @@ const schema = yup.object().shape({
   gallons: yup.number().required(),
   salt: yup.number().required(),
 });
+
+const INPUTS = [
+  { id: 'gallons', label: 'Pool Gallons:', placeholder: 'Enter Gallons' },
+  {
+    id: 'salt',
+    label: 'Current Salt:',
+    placeholder: 'Enter Current Salt',
+  },
+];
 
 const SaltForm = () => {
   const [saltNeeded, setSaltNeeded] = useState(null);
@@ -34,50 +46,28 @@ const SaltForm = () => {
       validationSchema={schema}
     >
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>Calculate Salt Needed</h2>
+        <Form
+          onFormSubmit={handleSubmit}
+          header={LABELS.saltForm.header}
+          result={`${saltNeeded} ${CHEMICALS.salt.unit}`}
+          type={CHEMICALS.salt.label}
+        >
+          {INPUTS.map(({ id, label, placeholder }) => (
+            <Input
+              key={id}
+              name={id}
+              label={label}
+              placeholder={placeholder}
+              value={values[id]}
+              onInputChange={handleChange}
+            />
+          ))}
 
-          {saltNeeded && (
-            <div className={styles.resultContainer}>
-              <p>Total Salt to Add:</p>
-              <p className={styles.result}>
-                {saltNeeded} {UNITS.pounds}
-              </p>
-            </div>
-          )}
-
-          <div className={styles.inputs}>
-            <div>
-              <label htmlFor='gallons'>Pool Gallons: </label>
-              <input
-                type='number'
-                name='gallons'
-                placeholder='Enter Gallons'
-                onChange={handleChange}
-                value={values.gallons}
-              />
-            </div>
-
-            <div>
-              <label htmlFor='salt'>Current Salt: </label>
-              <input
-                type='number'
-                name='salt'
-                placeholder='Enter Current Salt'
-                onChange={handleChange}
-                value={values.salt}
-              />
-            </div>
-
-            <button
-              type='submit'
-              disabled={!dirty || !isValid}
-              className={styles.button}
-            >
-              Calculate
-            </button>
-          </div>
-        </form>
+          <Button
+            label={LABELS.saltForm.button}
+            isDisabled={!dirty || !isValid}
+          />
+        </Form>
       )}
     </Formik>
   );
