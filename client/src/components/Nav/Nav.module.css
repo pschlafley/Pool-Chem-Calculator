@@ -6,10 +6,12 @@
 }
 
 .listItem {
+    color: rgb(11, 126, 88);
     text-decoration: none;
-    color: rgb(9, 23, 218);
-};
+}
 
-.listItem:hover {
-    color: rgb(5, 112, 85);
-};
+.listItem:focus {
+    padding: 4px;
+    color: rgb(41, 39, 39);
+    outline: 3px solid orange;
+}
