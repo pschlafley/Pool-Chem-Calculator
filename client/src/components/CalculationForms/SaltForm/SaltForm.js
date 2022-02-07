@@ -30,6 +30,8 @@ const INPUTS = [
 
 const SaltForm = () => {
   const [saltNeeded, setSaltNeeded] = useState(null);
+  const result =
+    saltNeeded !== null ? `${saltNeeded} ${CHEMICALS.salt.unit}` : '';
 
   const handleCalculateSalt = ({ gallons, salt }, resetForm) => {
     const amountNeeded = Math.abs(calculatePoolSalt(gallons, salt));
@@ -49,7 +51,7 @@ const SaltForm = () => {
         <Form
           onFormSubmit={handleSubmit}
           header={LABELS.saltForm.header}
-          result={`${saltNeeded} ${CHEMICALS.salt.unit}`}
+          result={result}
           type={CHEMICALS.salt.label}
         >
           {INPUTS.map(({ id, label, placeholder }) => (
