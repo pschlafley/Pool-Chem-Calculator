@@ -13,4 +13,19 @@ export const CHEMICALS = {
     label: 'Muriatic Acid',
     unit: UNITS.fluidOunce,
   },
+  salt: {
+    label: 'Salt',
+    unit: UNITS.pounds,
+  },
+};
+
+export const LABELS = {
+  alkForm: {
+    header: 'Calculate Alkalinity Needed',
+    button: 'Calculate',
+  },
+  saltForm: {
+    header: 'Calculate Salt Needed',
+    button: 'Calculate',
+  },
 };
