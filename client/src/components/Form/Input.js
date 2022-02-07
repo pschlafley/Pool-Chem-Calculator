@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Form.module.css';
 
 const Input = ({
-  name,
-  label,
+  name = '',
+  label = '',
   type = 'number',
-  onInputChange,
-  placeholder,
-  value,
+  onInputChange = null,
+  placeholder = '',
+  value = null,
 }) => (
   <div className={styles.input}>
     <label htmlFor={name}>{label}</label>
@@ -21,5 +22,14 @@ const Input = ({
     />
   </div>
 );
+
+Input.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  onInputChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
 
 export default Input;
