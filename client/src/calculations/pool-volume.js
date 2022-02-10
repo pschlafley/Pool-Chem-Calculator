@@ -72,13 +72,7 @@ const calculatePoolVol = poolType => {
   return volumeCalcs[poolType];
 };
 
-<<<<<<< HEAD
 export const calculateRectangleVolume = calculatePoolVol(POOL_SHAPES.rectanguler);
-=======
-export const calculateRectangleVolume = calculatePoolVol(
-  POOL_SHAPES.rectanguler
-);
->>>>>>> 7f8b1ce2f37163ab69fcba17d276dd4b66a6537e
 calculateRectangleVolume(30, 20, 2, 10);
 
 export const calculateCircularVolume = calculatePoolVol(POOL_SHAPES.circular);
