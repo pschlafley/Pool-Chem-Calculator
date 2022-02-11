@@ -1,25 +1,28 @@
-.container {
-    position: relative;
-    color: white;
+.backgroundImage {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    position: fixed; 
+    background-image: url(../../assets/images/pool-bg.webp); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
-.backgroundImage {
-    margin-top: -60px;
-    margin-left: -7.5px;
-    width: 100vw;
-    height: 100vh;
-    float: left;
-    position: relative;
-    background-size: cover;
-    background-image: url(../../assets/images/jump-bg.avif);
+.ddPosition {
+    position: absolute;
+    top: auto;
+    left: 85%;
 }
 
 .textCenter {
     position: absolute;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50% -50%);
+    top: 40%;
+    left: 30%; 
+    font-size: x-large;
 }
 
 .listItem {
@@ -27,6 +30,106 @@
     text-decoration: underline;
 }
 
-.listItem:hover {
-    border: 2px solid orange;
+@media screen and (max-width: 2560px) {
+    .textCenter {
+        font-size: 70px;
+        top: 35%;
+        left: 15%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 90%;
+        font-size: 70px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .textCenter {
+        font-size: 30px;
+        top: 35%;
+        left: 25%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 90%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .textCenter {
+        font-size: 30px;
+        top: 40%;
+        left: 17%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 80%;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .textCenter {
+        font-size: 30px;
+        top: 40%;
+        left: 17%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .textCenter {
+        font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+        top: 45%;
+        left: 20%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 80%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .textCenter {
+        font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+        top: 45%;
+        left: 2%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 65%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .textCenter {
+        font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+        top: 45%;
+        left: 3%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 65%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .textCenter {
+        font-size: smaller;
+        top: 45%;
+        left: 3%;
+    }
+
+    .ddPosition {
+        top: auto;
+        left: 50%;
+    }
 }
