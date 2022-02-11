@@ -44,12 +44,13 @@ const AlkalinityForm = () => {
     const unit = !doesNeedAcid
       ? UNITS.pounds
       : quarts
-        ? UNITS.quarts
-        : UNITS.fluidOunce;
+      ? UNITS.quarts
+      : UNITS.fluidOunce;
 
     const formattedResult = quarts
-      ? `${Math.abs(amountNeeded) / 32} ${unit}`
+      ? `${Number((Math.abs(amountNeeded) / 32).toFixed(1))} ${unit}`
       : `${Math.abs(amountNeeded)} ${unit}`;
+
     setChemicalNeeded({
       chemical: doesNeedAcid ? CHEMICALS.acid.label : CHEMICALS.base.label,
       result: formattedResult,
