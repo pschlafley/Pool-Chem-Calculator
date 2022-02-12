@@ -25,7 +25,11 @@ const schema = yup.object().shape({
 });
 
 const INPUTS = [
-  { id: 'gallons', label: 'Pool Gallons:', placeholder: 'Enter Gallons' },
+  {
+    id: 'gallons',
+    label: 'Pool Gallons:',
+    placeholder: 'Enter Gallons',
+  },
   {
     id: 'alkalinity',
     label: 'Current Alkalinity (in PPM):',
@@ -74,7 +78,7 @@ const AlkalinityForm = () => {
           result={chemicalNeeded.result}
           type={chemicalNeeded.chemical}
         >
-          {INPUTS.map(({ id, label, placeholder }) => (
+          {INPUTS.map(({ id, label, placeholder }, i) => (
             <Input
               key={id}
               name={id}
@@ -82,6 +86,7 @@ const AlkalinityForm = () => {
               placeholder={placeholder}
               value={values[id]}
               onInputChange={handleChange}
+              isFirstInput={i === 0}
             />
           ))}
 

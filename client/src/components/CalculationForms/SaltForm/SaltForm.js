@@ -54,7 +54,7 @@ const SaltForm = () => {
           result={result}
           type={CHEMICALS.salt.label}
         >
-          {INPUTS.map(({ id, label, placeholder }) => (
+          {INPUTS.map(({ id, label, placeholder }, i) => (
             <Input
               key={id}
               name={id}
@@ -62,6 +62,7 @@ const SaltForm = () => {
               placeholder={placeholder}
               value={values[id]}
               onInputChange={handleChange}
+              isFirstInput={i === 0}
             />
           ))}
 
