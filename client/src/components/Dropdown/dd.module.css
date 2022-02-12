@@ -1,25 +1,40 @@
 li {
     list-style: none;
+    padding: .5em 0 .2em 0;
 }
 
-/* .ddContainer {
-    display: flex;
-    width: 8em;
-    margin: 0 auto;
-} */
-
-.ddHeader {
-    margin: .8em;
-    padding: 0.4em .5em 0.4em .5em;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-    font-weight: 500;
-    font-size: 1.3rem;
-    background: #ffffff;
-    color: #1fa1f8;
-    border-radius: 10px;
+.ddContainer > div {
+    height: 4px;
+    background-color: white;
+    margin: 5px 0;
+    border-radius: 25px;
+    transition: 0.3s;
 }
 
-.ddHeader:hover {
+.ddContainer {
+    display: block;
+    width: 30px;
+    margin: 1em 0 0 1em;    
+}
+
+.lineOne {
+    width: 30px;
+}
+
+.lineTwo {
+    width: 20px;
+}
+
+.lineThree {
+    width: 25px;
+}
+
+.ddContainer:hover div {
+    width: 30px;
+    background-color: orange;
+}
+
+.ddContainer:hover {
     cursor: pointer;
 }
 
@@ -29,25 +44,46 @@ li {
 
 .ddList {
     text-decoration: none;
-    margin: 1px;
-    padding: 7px;
-    background: #1fa1f8;
-    border: 2px solid #e5e5e5;
-    border-radius: 10px;
-    box-sizing: border-box;
-    color: #1fa1f8;
+    margin: 10px;
+    padding: 10px;
     font-size: 1.3rem;
     font-weight: 500;
 }
 
 .listItem {
     text-decoration: none;
-    margin-bottom: 0.8em;
+    margin-bottom: 1em 0 0 1em;
+    padding: 0 .5em 0 .5em;
     color: white;
+    transition: color .25s;
 }
 
 .listItem:hover {
-    background-color: #ffffff;
-    color: #1fa1f8;
-    padding: 2px;
+    color: orange;
+    border-left: 2px solid orange;
+    border-right: 2px solid orange;
+    transition: .25s ease-in;
+}
+
+
+
+@media only screen and (max-width: 1440px) and (min-width: 1025px) {
+    .ddContainer > div {
+        height: 8px;
+    }
+    .lineOne {
+        width: 40px;
+    }
+
+    .lineTwo {
+        width: 30px;
+    }
+
+    .lineThree {
+        width: 35px;
+    }
+
+    .ddContainer:hover div {
+        width: 40px;
+    }
 }
