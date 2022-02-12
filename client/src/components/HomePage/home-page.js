@@ -7,6 +7,7 @@ import DropDown from "../Dropdown/dropdown";
 // Photo by Pixabay: https://www.pexels.com/photo/blue-lounger-beside-swimming-pool-221457/
 
 function Home() {
+    console.log(window.innerWidth)
     return (
         <>
             <div className={styles.container}>
