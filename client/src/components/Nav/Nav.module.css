@@ -10,6 +10,8 @@
     text-decoration: none;
 }
 
-.listItem:focus {
-    border: 2px solid orange;
+.listItem:hover {
+    transition: .25s ease-in;
+    border-left: 2px solid orange;
+    border-right: 2px solid orange;
 }
