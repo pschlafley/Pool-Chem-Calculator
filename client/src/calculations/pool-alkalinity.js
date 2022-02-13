@@ -37,7 +37,5 @@ export const calculateTotalAlkalinity = (poolGallons, alkalinityInPool) => {
     return result;
   }
 
-  return totalPoundsToAdd <= 0 ? 0 : totalPoundsToAdd.toFixed(1);
+  return totalPoundsToAdd <= 0 ? 0 : Number(totalPoundsToAdd.toFixed(1));
 };
-
-// calculateTotalAlkalinity(10000, 130);
