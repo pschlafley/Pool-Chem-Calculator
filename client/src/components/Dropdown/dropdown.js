@@ -19,18 +19,20 @@ const DropDown = () => {
             </section>
             <div>
                 {isOpen && (
-                    <div className={styles.ddListContainer}>
+                    <section className={styles.ddListContainer}>
                         <ul className={styles.ddList}>
                             <li>
-                                <Link className={styles.listItem} to='/alkalinity-form'>
-                                    <button>Alkalinity</button>
+                                <Link to='/alkalinity-form'>
+                                    <button className={styles.draw}>Alkalinity</button>
                                 </Link>
                             </li>
-                            <li >
-                                <Link className={styles.listItem} to='/salt-form'>Salt</Link>
+                            <li>
+                                <Link to='/salt-form'>
+                                    <button className={styles.draw}>Salt</button>
+                                </Link>
                             </li>
                         </ul>
-                    </div>
+                    </section>
                 )}
             </div>
         </>

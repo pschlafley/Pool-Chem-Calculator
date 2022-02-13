@@ -6,9 +6,15 @@ import styles from './Nav.module.css';
 const NavBar = () => {
     return (
         <div className={styles.container}>
-            <Link className={styles.listItem} to='/salt-form'>Salt Form</Link>
-            <Link className={styles.listItem} to='/alkalinity-form'>Alkalinty Form</Link>
-            <Link className={styles.listItem} to='/'>Home</Link>
+            <Link className={styles.link} to='/'>
+                <button className={styles.draw}>Home</button>
+            </Link>
+            <Link to='/alkalinity-form'>
+                <button className={styles.draw}>Alkalinity form</button>
+            </Link>
+            <Link to='/salt-form'>
+                <button className={styles.draw}>Salt form</button>
+            </Link>
         </div>
     );
 };
