@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import useStyles from 'isomorphic-style-loader/useStyles';
 import styles from './Form.module.css';
 
 const Input = ({
@@ -13,7 +14,7 @@ const Input = ({
   isFirstInput = false,
 }) => {
   const inputRef = useRef(null);
-
+  useStyles(styles);
   useEffect(() => {
     // focus the first input on first render and after calculating the result
     if (isFirstInput && !value) inputRef.current.focus();

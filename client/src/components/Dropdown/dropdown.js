@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import styles from './dd.module.css';
 
+import useStyles from 'isomorphic-style-loader/useStyles';
+
 // here is the link for the webpage that I found to create this dropdown menu
 // https://andela.com/insights/react-js-tutorial-on-creating-a-custom-select-dropdown/
 
 const DropDown = () => {
+    useStyles(styles);
 
     const [isOpen, setIsOpen] = useState(false);
 

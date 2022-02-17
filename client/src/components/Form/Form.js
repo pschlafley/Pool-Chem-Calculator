@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import useStyles from 'isomorphic-style-loader/useStyles';
 import styles from './Form.module.css';
 
 const Form = ({
@@ -17,6 +18,7 @@ const Form = ({
     </div>
   );
 
+  useStyles(styles);
   return (
     <form className={styles.form} onSubmit={onFormSubmit}>
       <h2>{header}</h2>
