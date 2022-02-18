@@ -3,7 +3,7 @@ import NavBar from './components/Nav/navbar';
 import AlkalinityForm from './components/CalculationForms/AlkalinityForm/AlkalinityForm';
 import SaltForm from './components/CalculationForms/SaltForm/SaltForm';
 import Home from './components/HomePage/home-page';
-import { Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
