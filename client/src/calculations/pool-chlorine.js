@@ -1,4 +1,9 @@
-const calculateChlorine = (freeChlor, totalChlor, poolGals, typeOfChlor) => {
+export const calculateChlorine = (
+  freeChlor,
+  totalChlor,
+  poolGals,
+  typeOfChlor
+) => {
   const COMBINED_CHLOR = totalChlor - freeChlor;
 
   if (typeOfChlor === 'granular') {
@@ -19,7 +24,7 @@ const calculateChlorine = (freeChlor, totalChlor, poolGals, typeOfChlor) => {
     // convert to gallons
     let gals = RESULT / 128;
     console.log(
-      `You should add ${gals} gallons of 12.5% Sodium Hypochlorite you to your pool`
+      `You should add ${gals} gallons of chlorine shock you to your pool`
     );
   }
 
@@ -32,4 +37,4 @@ const calculateChlorine = (freeChlor, totalChlor, poolGals, typeOfChlor) => {
   }
 };
 
-calculateChlorine(1, 3, 30000, 'liquid');
+// calculateChlorine(1, 3, 30000, 'liquid');

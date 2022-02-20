@@ -28,4 +28,15 @@ export const LABELS = {
     header: 'Calculate Salt Needed',
     button: 'Calculate',
   },
+  chlorineForm: {
+    header: 'Calculate Chlorine Needed',
+    button: 'Calculate',
+  },
+};
+
+export const POOL_SHAPES = {
+  rectanguler: 'Rectangular',
+  circular: 'Circular',
+  oval: 'Oval',
+  oblong: 'Oblong',
 };

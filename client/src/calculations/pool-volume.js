@@ -1,9 +1,4 @@
-const POOL_SHAPES = {
-  rectanguler: 'Rectangular',
-  circular: 'Circular',
-  oval: 'Oval',
-  oblong: 'Oblong',
-};
+import { POOL_SHAPES } from '../constants';
 
 const POOL_MEASUREMENTS = {
   len: 'Length',

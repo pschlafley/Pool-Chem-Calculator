@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './dd.module.css';
 
@@ -6,37 +6,41 @@ import styles from './dd.module.css';
 // https://andela.com/insights/react-js-tutorial-on-creating-a-custom-select-dropdown/
 
 const DropDown = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggling = () => setIsOpen(!isOpen);
-    return (
-        <>
-            <section className={styles.ddContainer} onClick={toggling}>
-                <div className={styles.lineOne}></div>
-                <div className={styles.lineTwo}></div>
-                <div className={styles.lineThree}></div>
-            </section>
-            <div>
-                {isOpen && (
-                    <section className={styles.ddListContainer}>
-                        <ul className={styles.ddList}>
-                            <li>
-                                <Link to='/alkalinity-form'>
-                                    <button className={styles.draw}>Alkalinity</button>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/salt-form'>
-                                    <button className={styles.draw}>Salt</button>
-                                </Link>
-                            </li>
-                        </ul>
-                    </section>
-                )}
-            </div>
-        </>
-    );
-}
+  const toggling = () => setIsOpen(!isOpen);
+  return (
+    <>
+      <section className={styles.ddContainer} onClick={toggling}>
+        <div className={styles.lineOne}></div>
+        <div className={styles.lineTwo}></div>
+        <div className={styles.lineThree}></div>
+      </section>
+      <div>
+        {isOpen && (
+          <section className={styles.ddListContainer}>
+            <ul className={styles.ddList}>
+              <li>
+                <Link to='/alkalinity-form'>
+                  <button className={styles.draw}>Alkalinity</button>
+                </Link>
+              </li>
+              <li>
+                <Link to='/salt-form'>
+                  <button className={styles.draw}>Salt</button>
+                </Link>
+              </li>
+              <li>
+                <Link to='/chlorine-form'>
+                  <button className={styles.draw}>Chlorine</button>
+                </Link>
+              </li>
+            </ul>
+          </section>
+        )}
+      </div>
+    </>
+  );
+};
 
 export default DropDown;

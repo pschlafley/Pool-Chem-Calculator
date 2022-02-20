@@ -18,11 +18,13 @@ const Form = ({
   );
 
   return (
-    <form className={styles.form} onSubmit={onFormSubmit}>
-      <h2>{header}</h2>
-      {result ? renderResult() : null}
-      <div className={styles.inputs}>{children}</div>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={onFormSubmit}>
+        <h2>{header}</h2>
+        {result ? renderResult() : null}
+        <div className={styles.inputs}>{children}</div>
+      </form>
+    </div>
   );
 };
 
