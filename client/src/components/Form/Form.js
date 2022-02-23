@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Form.module.css';
+import { CHEMICALS } from '../../constants';
 
 const Form = ({
   type, // chemical to be displayed with the result
@@ -13,7 +14,13 @@ const Form = ({
   const renderResult = () => (
     <div className={styles.resultContainer}>
       <p>Total {type} to Add:</p>
-      <p className={styles.result}>{result}</p>
+      <p
+        className={`${styles.result} ${
+          type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
+        }`}
+      >
+        {result}
+      </p>
     </div>
   );
 

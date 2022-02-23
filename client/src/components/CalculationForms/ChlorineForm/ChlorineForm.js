@@ -7,7 +7,7 @@ import Input from '../../Form/Input';
 import Button from '../../Form/Button';
 
 import { calculateChlorine } from '../../../calculations/pool-chlorine';
-import { LABELS, POOL_SHAPES } from '../../../constants';
+import { LABELS, CHLORINE_TYPES } from '../../../constants';
 
 const INPUTS = [
   {
@@ -30,9 +30,9 @@ const INPUTS = [
     label: 'Chlorine Type',
     placeholder: 'Select One',
     type: 'select',
-    options: Object.keys(POOL_SHAPES).map(key => ({
+    options: Object.keys(CHLORINE_TYPES).map(key => ({
       id: key,
-      label: POOL_SHAPES[key],
+      label: CHLORINE_TYPES[key],
     })),
   },
 ];
@@ -52,12 +52,43 @@ const schema = yup.object().shape(
   )
 );
 
-const ChlorineForm = () => {
-  const [chlorineResult, setChlorineResult] = useState(null);
+const initialResultState = {
+  message: null,
+  type: null,
+};
 
-  // TODO - finish this handler to get the result
+const RESULT_MESSAGES = {
+  granular: {
+    start: 'You should add',
+    end: 'lbs of non chlorine shock to your pool.',
+    subMessage:
+      'You may need to add more bags of shock if your pool has a lot of algae!',
+  },
+  liquid: {
+    start: 'You should add',
+    end: 'gallons of chlorine shock you to your pool.',
+  },
+};
+
+const ChlorineForm = () => {
+  const [chlorineResult, setChlorineResult] = useState(initialResultState);
+  console.log('chlorineResult:', chlorineResult);
+
+  const getResultMessage = (type, value) => {
+    return ` ${RESULT_MESSAGES[type].start} ${value} ${RESULT_MESSAGES[type].end}`;
+  };
+
+  // TODO - determine which chlorine type and set that in chlorineResult
   const handleCalculateChlorine = (values, resetForm) => {
-    console.log('submitted!');
+    const { gallons, freeChlor, totalChlor, chlorineType } = values;
+    const calculationValue = calculateChlorine(
+      freeChlor,
+      totalChlor,
+      gallons,
+      chlorineType
+    );
+    const message = getResultMessage(chlorineType, calculationValue);
+    setChlorineResult({ ...chlorineResult, message });
     resetForm();
   };
 
@@ -74,7 +105,7 @@ const ChlorineForm = () => {
           <Form
             onFormSubmit={handleSubmit}
             header={LABELS.chlorineForm.header}
-            result={chlorineResult}
+            result={chlorineResult.message}
             type={'chlorine'}
           >
             {INPUTS.map(({ id, label, placeholder, type, options }, i) => (

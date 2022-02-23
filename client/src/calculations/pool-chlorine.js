@@ -1,3 +1,5 @@
+import { getFixedDecimal } from '../utils/numberFormatters';
+
 export const calculateChlorine = (
   freeChlor,
   totalChlor,
@@ -5,6 +7,15 @@ export const calculateChlorine = (
   typeOfChlor
 ) => {
   const COMBINED_CHLOR = totalChlor - freeChlor;
+
+  if (COMBINED_CHLOR > 1) {
+    const NC_SHOCK = poolGals / 10000;
+    console.log(
+      `You should add ${NC_SHOCK} lbs of non chlorine shock to your pool.`
+    );
+    console.log('NC_SHOCK:', NC_SHOCK);
+    return getFixedDecimal(NC_SHOCK);
+  }
 
   if (typeOfChlor === 'granular') {
     const SHOCK = poolGals / 10000;
@@ -14,7 +25,8 @@ export const calculateChlorine = (
     console.log(
       'You may need to add more bags of shock if your pool has a lot of algae!'
     );
-    return SHOCK;
+    console.log('SHOCK:', SHOCK);
+    return getFixedDecimal(SHOCK);
   } else if (typeOfChlor === 'liquid') {
     const PPM_INCREASE = COMBINED_CHLOR * 10 - freeChlor;
     let galsDivisor = poolGals / 10000;
@@ -26,15 +38,7 @@ export const calculateChlorine = (
     console.log(
       `You should add ${gals} gallons of chlorine shock you to your pool`
     );
-  }
-
-  if (COMBINED_CHLOR > 1) {
-    const NC_SHOCK = poolGals / 10000;
-    console.log(
-      `You should add ${NC_SHOCK} lbs of non chlorine shock to your pool.`
-    );
-    return NC_SHOCK;
+    console.log('gals:', gals);
+    return getFixedDecimal(gals);
   }
 };
-
-// calculateChlorine(1, 3, 30000, 'liquid');
