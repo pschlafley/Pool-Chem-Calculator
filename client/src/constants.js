@@ -52,3 +52,22 @@ export const CHLORINE_TYPES = {
   granular: 'Granular',
   liquid: 'Liquid',
 };
+
+export const CHLORINE_RESULT_MESSAGES = {
+  granular: {
+    start: 'You should add',
+    end: 'lbs of solid chlorine shock to your pool.',
+    subMessage:
+      'You may need to add more bags of shock if your pool has a lot of algae!',
+  },
+  liquid: {
+    start: 'You should add',
+    end: 'gallons of liquid chlorine shock you to your pool.',
+  },
+  oxidixing: {
+    // Non-Chlorine shock - oxidizing shock
+    start: 'You should add',
+    end: 'lbs of non chlorine oxidizing shock to your pool.',
+  },
+  none: 'You do not need to add any chlorine.',
+};
