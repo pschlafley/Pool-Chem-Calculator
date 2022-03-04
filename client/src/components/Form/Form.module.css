@@ -36,6 +36,12 @@
   margin-bottom: 5%;
 }
 
+.resultSubMessage {
+  composes: result;
+  font-size: 14px;
+  width: 75%;
+}
+
 .isChlorineResult {
   width: 75%;
 }

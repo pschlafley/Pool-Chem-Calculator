@@ -19,8 +19,11 @@ const Form = ({
           type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
         }`}
       >
-        {result}
+        {result?.message || result}
       </p>
+      {result?.subMessage && (
+        <p className={styles.resultSubMessage}>{result?.subMessage}</p>
+      )}
     </div>
   );
 
@@ -39,7 +42,11 @@ Form.propTypes = {
   type: PropTypes.string,
   header: PropTypes.string.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
-  result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  result: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.objectOf(PropTypes.string),
+  ]),
   children: PropTypes.node.isRequired,
 };
 

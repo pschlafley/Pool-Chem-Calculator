@@ -63,6 +63,8 @@ export const CHLORINE_RESULT_MESSAGES = {
   liquid: {
     start: 'You should add',
     end: 'gallons of liquid chlorine shock you to your pool.',
+    subMessage:
+      'You may need to add more bags of shock if your pool has a lot of algae!',
   },
   oxidixing: {
     // Non-Chlorine shock - oxidizing shock

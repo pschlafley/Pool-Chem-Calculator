@@ -7,7 +7,11 @@ import Input from '../../Form/Input';
 import Button from '../../Form/Button';
 
 import { calculateChlorine } from '../../../calculations/pool-chlorine';
-import { LABELS, CHLORINE_TYPES } from '../../../constants';
+import {
+  LABELS,
+  CHLORINE_TYPES,
+  CHLORINE_RESULT_MESSAGES,
+} from '../../../constants';
 
 const INPUTS = [
   {
@@ -57,28 +61,11 @@ const initialResultState = {
   value: null,
 };
 
-const RESULT_MESSAGES = {
-  granular: {
-    start: 'You should add',
-    end: 'lbs of solid chlorine shock to your pool.',
-    subMessage:
-      'You may need to add more bags of shock if your pool has a lot of algae!',
-  },
-  liquid: {
-    start: 'You should add',
-    end: 'gallons of liquid chlorine shock you to your pool.',
-  },
-  oxidixing: {
-    // Non-Chlorine shock - oxidizing shock
-    start: 'You should add',
-    end: 'lbs of non chlorine oxidizing shock to your pool.',
-  },
-};
-
 // chlorineResult action types
 const SET_NC_SHOCK_VALUE = 'SET_NC_SHOCK_VALUE';
 const SET_GRANULAR_VALUE = 'SET_GRANULAR_VALUE';
 const SET_LIQUID_VALUE = 'SET_TYPES_VALUE';
+const SET_NONE_NEEDED = 'SET_NONE_NEEDED';
 const RESET_RESULT = 'RESET_RESULT';
 
 const CHLORINE_ACTION_TYPES = {
@@ -90,11 +77,19 @@ const CHLORINE_ACTION_TYPES = {
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case SET_NC_SHOCK_VALUE:
-      return { message: RESULT_MESSAGES.oxidixing, value: payload.value };
+      return {
+        message: CHLORINE_RESULT_MESSAGES.oxidixing,
+        value: payload.value,
+      };
     case SET_GRANULAR_VALUE:
-      return { message: RESULT_MESSAGES.granular, value: payload.value };
+      return {
+        message: CHLORINE_RESULT_MESSAGES.granular,
+        value: payload.value,
+      };
     case SET_LIQUID_VALUE:
-      return { message: RESULT_MESSAGES.liquid, value: payload.value };
+      return { message: CHLORINE_RESULT_MESSAGES.liquid, value: payload.value };
+    case SET_NONE_NEEDED:
+      return { message: CHLORINE_RESULT_MESSAGES.none, value: null };
     case RESET_RESULT:
       return { message: null, value: null };
     default:
@@ -106,9 +101,17 @@ const ChlorineForm = () => {
   const [chlorineResult, dispatch] = useReducer(reducer, initialResultState);
 
   const getResultMessage = (message, value) => {
-    return !message || value === null
+    const { start, end } = message || {};
+    if (message && !value) {
+      return message;
+    }
+
+    return !message && !value
       ? null
-      : `${message?.start} ${value} ${message?.end}`;
+      : {
+          message: `${start} ${value} ${end}`,
+          subMessage: message?.subMessage,
+        };
   };
 
   const result = getResultMessage(
@@ -129,20 +132,27 @@ const ChlorineForm = () => {
     );
     console.log('value:', value);
 
-    if (combinedChlorine >= 1) {
+    try {
+      if (combinedChlorine >= 1) {
+        dispatch({
+          type: SET_NC_SHOCK_VALUE,
+          payload: { value },
+        });
+        return;
+      }
+
+      if (value < 1) {
+        dispatch({ type: SET_NONE_NEEDED, payload: { value } });
+        return;
+      }
+
       dispatch({
-        type: SET_NC_SHOCK_VALUE,
+        type: CHLORINE_ACTION_TYPES[chlorineType],
         payload: { value },
       });
-      return;
+    } finally {
+      resetForm();
     }
-
-    dispatch({
-      type: CHLORINE_ACTION_TYPES[chlorineType],
-      payload: { value },
-    });
-
-    resetForm();
   };
 
   return (
