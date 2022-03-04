@@ -1,12 +1,21 @@
-.form {
+.flexColumn {
   display: flex;
   flex-direction: column;
+}
+
+.container {
+  composes: flexColumn;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.form {
+  composes: flexColumn;
   text-align: center;
   min-height: 50vh;
   width: 350px;
   border: 1px solid lightgray;
   border-radius: 5px;
-  margin: 0 auto;
   background-color: lightseagreen;
 }
 
@@ -24,18 +33,21 @@
   border-radius: 3px;
   padding: 10px 5px;
   margin: auto;
+  margin-bottom: 5%;
+}
+
+.isChlorineResult {
+  width: 75%;
 }
 
 .inputs {
-  display: flex;
-  flex-direction: column;
+  composes: flexColumn;
   align-items: center;
   flex: 1;
 }
 
-.inputs > div {
-  display: flex;
-  flex-direction: column;
+.input {
+  composes: flexColumn;
   justify-content: center;
   flex: 1;
   gap: 10px;
@@ -66,4 +78,8 @@
 
 .button:hover {
   background-color: aqua;
+}
+
+.button.isDisabled {
+  color: gray;
 }

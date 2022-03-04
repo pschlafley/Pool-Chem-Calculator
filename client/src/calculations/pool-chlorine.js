@@ -1,16 +1,27 @@
-const calculateChlorine = (freeChlor, totalChlor, poolGals, typeOfChlor) => {
+import { getFixedDecimal } from '../utils/numberFormatters';
+import { CHLORINE_TYPES } from '../constants';
+
+const CHLOR_TYPES = Object.keys(CHLORINE_TYPES);
+
+export const calculateChlorine = (
+  freeChlor,
+  totalChlor,
+  poolGals,
+  typeOfChlor
+) => {
   const COMBINED_CHLOR = totalChlor - freeChlor;
 
-  if (typeOfChlor === 'granular') {
+  if (COMBINED_CHLOR >= 1) {
+    const NC_SHOCK = poolGals / 10000; // Non-Chlorine shock - oxidizing shock
+
+    return getFixedDecimal(NC_SHOCK); // bags of NC_SHOCK to use
+  }
+
+  if (typeOfChlor === CHLOR_TYPES[0]) {
     const SHOCK = poolGals / 10000;
-    console.log(
-      `You should add ${SHOCK} lbs of non chlorine shock to your pool.`
-    );
-    console.log(
-      'You may need to add more bags of shock if your pool has a lot of algae!'
-    );
-    return SHOCK;
-  } else if (typeOfChlor === 'liquid') {
+
+    return getFixedDecimal(SHOCK);
+  } else if (typeOfChlor === CHLOR_TYPES[1]) {
     const PPM_INCREASE = COMBINED_CHLOR * 10 - freeChlor;
     let galsDivisor = poolGals / 10000;
     // 10.7 ounces of 12.5% Sodium Hypochlorite to raise ppm by 1 per 10000 gallons
@@ -18,18 +29,7 @@ const calculateChlorine = (freeChlor, totalChlor, poolGals, typeOfChlor) => {
     const RESULT = Math.round(10.7 * galsDivisor * PPM_INCREASE);
     // convert to gallons
     let gals = RESULT / 128;
-    console.log(
-      `You should add ${gals} gallons of 12.5% Sodium Hypochlorite you to your pool`
-    );
-  }
 
-  if (COMBINED_CHLOR > 1) {
-    const NC_SHOCK = poolGals / 10000;
-    console.log(
-      `You should add ${NC_SHOCK} lbs of non chlorine shock to your pool.`
-    );
-    return NC_SHOCK;
+    return getFixedDecimal(gals);
   }
 };
-
-calculateChlorine(1, 3, 30000, 'liquid');

@@ -17,6 +17,13 @@ export const CHEMICALS = {
     label: 'Salt',
     unit: UNITS.pounds,
   },
+  chlorine: {
+    id: 'chlorine',
+    label: 'Chlorine',
+  },
+  nonChlorine: {
+    label: 'Non-Chlorine',
+  },
 };
 
 export const LABELS = {
@@ -28,4 +35,20 @@ export const LABELS = {
     header: 'Calculate Salt Needed',
     button: 'Calculate',
   },
+  chlorineForm: {
+    header: 'Calculate Chlorine Needed',
+    button: 'Calculate',
+  },
+};
+
+export const POOL_SHAPES = {
+  rectanguler: 'Rectangular',
+  circular: 'Circular',
+  oval: 'Oval',
+  oblong: 'Oblong',
+};
+
+export const CHLORINE_TYPES = {
+  granular: 'Granular',
+  liquid: 'Liquid',
 };
