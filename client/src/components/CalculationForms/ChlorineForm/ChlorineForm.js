@@ -11,6 +11,7 @@ import {
   LABELS,
   CHLORINE_TYPES,
   CHLORINE_RESULT_MESSAGES,
+  CHEMICALS,
 } from '../../../constants';
 
 const INPUTS = [
@@ -169,7 +170,7 @@ const ChlorineForm = () => {
             onFormSubmit={handleSubmit}
             header={LABELS.chlorineForm.header}
             result={result}
-            type={'chlorine'}
+            type={CHEMICALS.chlorine.label}
           >
             {INPUTS.map(({ id, label, placeholder, type, options }, i) => (
               <Input

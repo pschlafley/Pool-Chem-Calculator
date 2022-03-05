@@ -3,9 +3,13 @@
   flex-direction: column;
 }
 
-.container {
+.flexColumnCenteredItems {
   composes: flexColumn;
   align-items: center;
+}
+
+.container {
+  composes: flexColumnCenteredItems;
   margin-top: 5%;
 }
 
@@ -24,16 +28,15 @@
 }
 
 .resultContainer {
+  composes: flexColumnCenteredItems;
   font-weight: 700;
 }
 
 .result {
   background: aqua;
-  width: 25%;
+  max-width: 75%;
   border-radius: 3px;
   padding: 10px 5px;
-  margin: auto;
-  margin-bottom: 5%;
 }
 
 .resultSubMessage {
@@ -47,8 +50,7 @@
 }
 
 .inputs {
-  composes: flexColumn;
-  align-items: center;
+  composes: flexColumnCenteredItems;
   flex: 1;
 }
 
