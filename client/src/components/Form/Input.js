@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import Select from './Select';
 
 import styles from './Form.module.css';
 
@@ -11,13 +12,32 @@ const Input = ({
   placeholder = '',
   value = null,
   isFirstInput = false,
+  inputOptions = [],
 }) => {
   const inputRef = useRef(null);
+
+  const selectProps = {
+    name,
+    label,
+    onInputChange,
+    placeholder,
+    value,
+    inputOptions,
+    inputRef,
+  };
 
   useEffect(() => {
     // focus the first input on first render and after calculating the result
     if (isFirstInput && !value) inputRef.current.focus();
   }, [isFirstInput, value]);
+
+  if (type === 'select') {
+    return (
+      <div className={styles.input}>
+        <Select {...selectProps} />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.input}>
@@ -29,6 +49,7 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         ref={inputRef}
+        required
       />
     </div>
   );
@@ -42,6 +63,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isFirstInput: PropTypes.bool.isRequired,
+  inputOptions: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Input;
