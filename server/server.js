@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 
 import { typeDefs, resolvers } from './schema/index.js';
+import db from './config/connection.js';
 
 // newer version of apollo-server released - see docs https://www.apollographql.com/docs/apollo-server/integrations/middleware#apollo-server-express
 
@@ -26,11 +27,14 @@ async function startServer(typeDefs, resolvers) {
 
   // TODO - serve static assets, files, connect database
 
-  await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
-  console.log(`API server running on port ${PORT}!`);
-  console.log(
-    `🚀 GraphQL server running on http://localhost:${PORT}${server.graphqlPath}`
-  );
+  db.once('open', async () => {
+    await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
+
+    console.log(`API server running on port ${PORT}!`);
+    console.log(
+      `🚀 GraphQL server running on http://localhost:${PORT}${server.graphqlPath}`
+    );
+  });
 }
 
 startServer(typeDefs, resolvers);
