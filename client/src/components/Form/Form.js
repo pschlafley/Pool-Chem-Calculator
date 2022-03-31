@@ -15,9 +15,8 @@ const Form = ({
     <div className={styles.resultContainer}>
       <p>Total {type} to Add:</p>
       <p
-        className={`${styles.result} ${
-          type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
-        }`}
+        className={`${styles.result} ${type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
+          }`}
       >
         {result?.message || result}
       </p>
@@ -31,9 +30,9 @@ const Form = ({
     <div className={styles.container}>
       <form className={styles.form} onSubmit={onFormSubmit}>
         <h2>{header}</h2>
-        {result ? renderResult() : null}
         <div className={styles.inputs}>{children}</div>
       </form>
+      {result ? renderResult() : null}
     </div>
   );
 };
