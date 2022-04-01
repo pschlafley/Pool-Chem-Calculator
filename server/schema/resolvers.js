@@ -10,9 +10,12 @@ const resolvers = {
 
   Mutation: {
     createUser: async (_, args) => {
-      console.log('args', args);
       const user = await User.create(args);
-      return { user };
+      const newUser = {
+        ...user._doc,
+        createdAt: user._doc.createdAt.toString(),
+      };
+      return newUser;
     },
   },
 };
