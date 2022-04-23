@@ -1,4 +1,5 @@
 import { User } from '../models/index.js';
+import { signToken } from '../utils/auth.js';
 
 const resolvers = {
   Query: {
@@ -10,12 +11,16 @@ const resolvers = {
 
   Mutation: {
     createUser: async (_, args) => {
-      const user = await User.create(args);
-      const newUser = {
-        ...user._doc,
-        createdAt: user._doc.createdAt.toString(),
+      const tempUser = await User.create(args);
+
+      // getting user date from mongodb user._doc object
+      const user = {
+        ...tempUser._doc,
+        createdAt: tempUser._doc.createdAt.toString(),
       };
-      return newUser;
+      const token = signToken(user);
+
+      return { token, user };
     },
   },
 };

@@ -5,6 +5,7 @@ import http from 'http';
 
 import { typeDefs, resolvers } from './schema/index.js';
 import db from './config/connection.js';
+import { authMiddleware } from './utils/auth.js';
 
 // newer version of apollo-server released - see docs https://www.apollographql.com/docs/apollo-server/integrations/middleware#apollo-server-express
 
@@ -16,7 +17,7 @@ async function startServer(typeDefs, resolvers) {
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    // TODO - add the context with authmiddleware
+    context: { authMiddleware },
   });
 
   await server.start();

@@ -10,6 +10,11 @@ const typeDefs = gql`
     createdAt: String!
   }
 
+  type Auth {
+    token: ID!
+    user: User!
+  }
+
   type Query {
     users: [User]
   }
@@ -22,7 +27,7 @@ const typeDefs = gql`
       email: String!
       password: String!
       createdAt: String!
-    ): User
+    ): Auth
   }
 `;
 
