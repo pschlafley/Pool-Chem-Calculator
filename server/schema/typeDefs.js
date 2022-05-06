@@ -28,6 +28,7 @@ const typeDefs = gql`
       password: String!
       createdAt: String!
     ): Auth
+    login(email: String, username: String, password: String!): Auth
   }
 `;
 
