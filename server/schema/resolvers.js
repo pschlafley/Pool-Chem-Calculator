@@ -1,3 +1,5 @@
+import { AuthenticationError } from 'apollo-server-express';
+
 import { User } from '../models/index.js';
 import { signToken } from '../utils/auth.js';
 import validateEmail from '../utils/validateEmail.js';
@@ -18,26 +20,22 @@ const resolvers = {
 
   Mutation: {
     createUser: async (_, args) => {
-      const tempUser = await User.create(args);
+      const user = await User.create(args);
 
-      // getting user date from mongodb user._doc object
-      const user = {
-        ...tempUser._doc,
-        createdAt: tempUser._doc.createdAt.toString(),
-      };
       const token = signToken(user);
 
       return { token, user };
     },
 
-    login: async (_, { emailOrUsername, password }) => {
-      const isEmail = validateEmail(emailOrUsername);
+    login: async (_, { email, username, password }) => {
+      const isEmail = validateEmail(email);
+
       const userLogin = isEmail ? LOGIN_CONFIG.email : LOGIN_CONFIG.username;
 
-      console.log({ emailOrUsername, userLogin, isEmail });
+      console.log({ email, username, userLogin, isEmail });
 
       const user = await User.findOne({
-        [userLogin]: emailOrUsername,
+        [userLogin]: isEmail ? email : username,
       });
 
       if (!user) throw new AuthenticationError(LOGIN_CONFIG.errorMsg);
