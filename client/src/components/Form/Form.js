@@ -10,13 +10,15 @@ const Form = ({
   onFormSubmit = null,
   result,
   children = null,
+  autoComplete = true,
 }) => {
   const renderResult = () => (
     <div className={styles.resultContainer}>
       <p>Total {type} to Add:</p>
       <p
-        className={`${styles.result} ${type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
-          }`}
+        className={`${styles.result} ${
+          type === CHEMICALS.chlorine.id ? styles.isChlorineResult : ''
+        }`}
       >
         {result?.message || result}
       </p>
@@ -28,7 +30,11 @@ const Form = ({
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={onFormSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={onFormSubmit}
+        autoComplete={autoComplete ? 'on' : 'off'}
+      >
         <h2>{header}</h2>
         <div className={styles.inputs}>{children}</div>
       </form>

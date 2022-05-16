@@ -23,12 +23,6 @@
   background-color: lightseagreen;
 }
 
-.form:hover {
-  /* transform: rotateX(200deg); */
-  transform: rotateY(200deg);
-  transition: all 1s;
-}
-
 .form h2 {
   font-size: 1.25rem;
 }

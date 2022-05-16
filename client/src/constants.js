@@ -39,6 +39,10 @@ export const LABELS = {
     header: 'Calculate Chlorine Needed',
     button: 'Calculate',
   },
+  signUpForm: {
+    header: 'Sign Up',
+    button: 'Submit',
+  },
 };
 
 export const POOL_SHAPES = {
@@ -72,4 +76,9 @@ export const CHLORINE_RESULT_MESSAGES = {
     end: 'lbs of non chlorine oxidizing shock to your pool.',
   },
   none: 'You do not need to add any chlorine.',
+};
+
+export const INPUT_TYPES = {
+  text: 'text',
+  password: 'password',
 };

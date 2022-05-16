@@ -1,3 +1,6 @@
+import { Routes, Route } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+
 import './index.css';
 import NavBar from './components/Nav/navbar';
 import AlkalinityForm from './components/CalculationForms/AlkalinityForm/AlkalinityForm';
@@ -5,9 +8,7 @@ import SaltForm from './components/CalculationForms/SaltForm/SaltForm';
 import ChlorineForm from './components/CalculationForms/ChlorineForm/ChlorineForm';
 import DropDown from './components/Dropdown/dropdown';
 import Home from './components/HomePage/home-page';
-import { Routes, Route } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/salt-form' element={<SaltForm />} />
           <Route path='/alkalinity-form' element={<AlkalinityForm />} />
           <Route path='/chlorine-form' element={<ChlorineForm />} />
+          <Route path='/signup' element={<SignUp />} />
         </Routes>
       </>
     </div>
