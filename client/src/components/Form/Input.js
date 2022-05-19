@@ -15,6 +15,7 @@ const Input = ({
   inputOptions = [],
   className = '',
   isRequired = false,
+  ...restProps
 }) => {
   const inputRef = useRef(null);
 
@@ -52,6 +53,7 @@ const Input = ({
         value={value}
         ref={inputRef}
         required={isRequired}
+        {...restProps}
       />
     </div>
   );

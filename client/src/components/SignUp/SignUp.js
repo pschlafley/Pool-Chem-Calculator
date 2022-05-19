@@ -1,76 +1,46 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Formik } from 'formik';
-import * as yup from 'yup';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Button from '../Form/Button';
 
 import { LABELS, INPUT_TYPES } from '../../constants';
+import { CREATE_USER } from '../../graphql/mutations';
+import { INPUTS, initialValues, schema } from './signUpConfig';
+import Auth from '../../utils/auth';
 
 import styles from './SignUp.module.css';
 
-const initialValues = {
-  username: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-};
-
-const schema = yup.object().shape({
-  username: yup.string().trim().required(),
-  firstName: yup.string().trim().required(),
-  lastName: yup.string().trim().required(),
-  email: yup.string().email().trim().required(),
-  password: yup.string().trim().required(),
-  passwordConfirm: yup.string().trim().required(),
-});
-
-const INPUTS = [
-  {
-    id: 'username',
-    label: 'Username:',
-    placeholder: 'Enter Username',
-  },
-  {
-    id: 'firstName',
-    label: 'First Name:',
-    placeholder: 'Enter First Name',
-  },
-  {
-    id: 'lastName',
-    label: 'Last Name:',
-    placeholder: 'Enter Last Name',
-  },
-  {
-    id: 'email',
-    label: 'Email:',
-    placeholder: 'Enter Email',
-    type: 'email',
-  },
-  {
-    id: 'password',
-    label: 'Password:',
-    placeholder: 'Enter Password',
-    type: 'password',
-  },
-  {
-    id: 'passwordConfirm',
-    label: 'Confirm Password:',
-    placeholder: 'Enter Password',
-    type: 'password',
-  },
-];
-
 const SignUp = () => {
-  // TODO - add mututation
+  const [createUser, { loading }] = useMutation(CREATE_USER);
 
-  const handleSignup = (values, { resetForm }) => {
-    console.log(values);
+  const navigate = useNavigate();
 
-    resetForm();
+  const handleSignup = async values => {
+    const { password, passwordConfirm } = values;
+
+    if (password !== passwordConfirm) return;
+
+    try {
+      const { passwordConfirm, ...userValues } = values;
+
+      const {
+        data: {
+          createUser: { user, token },
+        },
+      } = await createUser({
+        variables: userValues,
+      });
+
+      Auth.login(token);
+
+      if (user) return navigate('/');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -79,7 +49,16 @@ const SignUp = () => {
       validationSchema={schema}
       onSubmit={handleSignup}
     >
-      {({ handleChange, handleSubmit, values, dirty, isValid }) => (
+      {({
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        values,
+        dirty,
+        isValid,
+        errors,
+        touched,
+      }) => (
         <Form
           onFormSubmit={handleSubmit}
           header={LABELS.signUpForm.header}
@@ -88,24 +67,29 @@ const SignUp = () => {
           {INPUTS.map(({ id, label, placeholder, type }, i) => {
             const isFirstInput = i === 0;
 
+            const hasError = !!errors[id] && !!touched[id];
+
             return (
-              <Input
-                key={id}
-                name={id}
-                label={label}
-                placeholder={placeholder}
-                onInputChange={handleChange}
-                isFirstInput={isFirstInput}
-                type={type || INPUT_TYPES.text}
-                className={!isFirstInput ? styles.input : ''}
-                value={values[id] || ''}
-                isRequired
-              />
+              <Fragment key={id}>
+                <Input
+                  name={id}
+                  label={label}
+                  placeholder={placeholder}
+                  onInputChange={handleChange}
+                  isFirstInput={isFirstInput}
+                  type={type || INPUT_TYPES.text}
+                  className={!isFirstInput ? styles.input : ''}
+                  value={values[id] || ''}
+                  isRequired
+                  onBlur={handleBlur}
+                />
+                {hasError && <p className={styles.error}>{errors[id]}</p>}
+              </Fragment>
             );
           })}
           <Button
             label={LABELS.signUpForm.button}
-            isDisabled={!dirty || !isValid}
+            isDisabled={!dirty || !isValid || loading}
           />
         </Form>
       )}
