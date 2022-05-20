@@ -20,8 +20,8 @@ const resolvers = {
 
   Mutation: {
     createUser: async (_, args) => {
-      const user = await User.create(args);
-
+      const hashedPassword = await bcrypt.hash(args.password, 12);
+      const user = await User.create({ ...args, password: hashedPassword });
       const token = signToken(user);
 
       return { token, user };
