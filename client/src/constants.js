@@ -43,6 +43,10 @@ export const LABELS = {
     header: 'Sign Up',
     button: 'Submit',
   },
+  loginForm: {
+    header: 'Login',
+    button: 'Login',
+  },
 };
 
 export const POOL_SHAPES = {

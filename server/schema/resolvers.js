@@ -29,10 +29,7 @@ const resolvers = {
 
     login: async (_, { email, username, password }) => {
       const isEmail = validateEmail(email);
-
       const userLogin = isEmail ? LOGIN_CONFIG.email : LOGIN_CONFIG.username;
-
-      console.log({ email, username, userLogin, isEmail });
 
       const user = await User.findOne({
         [userLogin]: isEmail ? email : username,

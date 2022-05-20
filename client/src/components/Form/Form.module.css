@@ -10,7 +10,7 @@
 
 .container {
   composes: flexColumnCenteredItems;
-  margin-top: 10%;
+  margin-top: 100px;
 }
 
 .form {
@@ -73,6 +73,10 @@
   border-radius: 3px;
 }
 
+.firstInput {
+  margin-top: 10px;
+}
+
 .button {
   font-size: 16px;
   font-weight: bold;
@@ -90,4 +94,11 @@
 
 .button.isDisabled {
   color: gray;
+}
+
+.error {
+  margin-top: 2px;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
 }

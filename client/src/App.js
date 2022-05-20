@@ -10,6 +10,7 @@ import ChlorineForm from './components/CalculationForms/ChlorineForm/ChlorineFor
 import DropDown from './components/Dropdown/dropdown';
 import Home from './components/HomePage/home-page';
 import SignUp from './components/SignUp/SignUp';
+import Login from './components/Login/Login';
 
 import Auth from './utils/auth';
 
@@ -44,6 +45,7 @@ function App() {
             <Route path='/salt-form' element={<SaltForm />} />
             <Route path='/alkalinity-form' element={<AlkalinityForm />} />
             <Route path='/chlorine-form' element={<ChlorineForm />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
           </Routes>
         </>

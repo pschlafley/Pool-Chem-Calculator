@@ -39,7 +39,7 @@ const NavBar = () => {
           Chlorine form
         </button>
       </Link>
-      <Link to={isLoggedIn ? '/' : '/signup'}>
+      <Link to={isLoggedIn ? '/' : '/login'}>
         <button
           className={styles.draw}
           onClick={isLoggedIn ? handleLogout : null}

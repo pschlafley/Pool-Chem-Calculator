@@ -8,36 +8,28 @@ import Input from '../Form/Input';
 import Button from '../Form/Button';
 
 import { LABELS, INPUT_TYPES } from '../../constants';
-import { CREATE_USER } from '../../graphql/mutations';
-import { INPUTS, initialValues, schema } from './signUpConfig';
-import Auth from '../../utils/auth';
+import { INPUTS, initialValues, schema } from './loginConfig';
 
 import styles from '../Form/Form.module.css';
+import { LOGIN_USER } from '../../graphql/mutations';
+import Auth from '../../utils/auth';
 
-const SignUp = () => {
-  const [createUser, { loading }] = useMutation(CREATE_USER);
+const Login = () => {
+  const [login, { loading }] = useMutation(LOGIN_USER);
 
   const navigate = useNavigate();
 
-  const handleSignup = async values => {
-    const { password, passwordConfirm } = values;
-
-    if (password !== passwordConfirm) return;
-
+  const handleLogin = async ({ username, password }) => {
     try {
-      const { passwordConfirm, ...userValues } = values;
-
       const {
         data: {
-          createUser: { user, token },
+          login: { user, token },
         },
-      } = await createUser({
-        variables: userValues,
-      });
+      } = await login({ variables: { username, password } });
 
       Auth.login(token);
 
-      if (user) return navigate('/');
+      // if (user) return navigate('/');
     } catch (err) {
       console.error(err);
     }
@@ -47,21 +39,21 @@ const SignUp = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={schema}
-      onSubmit={handleSignup}
+      onSubmit={handleLogin}
     >
       {({
+        handleBlur,
         handleChange,
         handleSubmit,
-        handleBlur,
         values,
         dirty,
+        touched,
         isValid,
         errors,
-        touched,
       }) => (
         <Form
           onFormSubmit={handleSubmit}
-          header={LABELS.signUpForm.header}
+          header={LABELS.loginForm.header}
           autoComplete={false}
         >
           {INPUTS.map(({ id, label, placeholder, type }, i) => {
@@ -87,7 +79,7 @@ const SignUp = () => {
             );
           })}
           <Button
-            label={LABELS.signUpForm.button}
+            label={LABELS.loginForm.button}
             isDisabled={!dirty || !isValid || loading}
           />
         </Form>
@@ -96,4 +88,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
