@@ -29,7 +29,7 @@ const Login = () => {
 
       Auth.login(token);
 
-      // if (user) return navigate('/');
+      if (user) return navigate('/');
     } catch (err) {
       console.error(err);
     }

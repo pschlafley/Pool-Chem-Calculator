@@ -42,7 +42,6 @@ class AuthService {
   // Set token to localStorage and reload page to the homepage
   login(idToken) {
     localStorage.setItem(this.authToken, idToken);
-    window.location.assign('/');
   }
 
   // lear token from localstorage and force logout with reload
