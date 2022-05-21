@@ -9,17 +9,17 @@ import Button from '../Form/Button';
 
 import { LABELS, INPUT_TYPES } from '../../constants';
 import { CREATE_USER } from '../../graphql/mutations';
-import { INPUTS, initialValues, schema } from './signUpConfig';
+import { INPUTS, initialValues, schema } from './registerConfig';
 import Auth from '../../utils/auth';
 
 import styles from '../Form/Form.module.css';
 
-const SignUp = () => {
+const Register = () => {
   const [createUser, { loading }] = useMutation(CREATE_USER);
 
   const navigate = useNavigate();
 
-  const handleSignup = async values => {
+  const handleRegister = async values => {
     const { password, passwordConfirm } = values;
 
     if (password !== passwordConfirm) return;
@@ -47,7 +47,7 @@ const SignUp = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={schema}
-      onSubmit={handleSignup}
+      onSubmit={handleRegister}
     >
       {({
         handleChange,
@@ -61,7 +61,7 @@ const SignUp = () => {
       }) => (
         <Form
           onFormSubmit={handleSubmit}
-          header={LABELS.signUpForm.header}
+          header={LABELS.registerForm.header}
           autoComplete={false}
         >
           {INPUTS.map(({ id, label, placeholder, type }, i) => {
@@ -87,7 +87,7 @@ const SignUp = () => {
             );
           })}
           <Button
-            label={LABELS.signUpForm.button}
+            label={LABELS.registerForm.button}
             isDisabled={!dirty || !isValid || loading}
           />
         </Form>
@@ -96,4 +96,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

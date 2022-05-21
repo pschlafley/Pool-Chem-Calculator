@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { LABELS, ROUTES } from '../../constants';
 
 import Auth from '../../utils/auth';
 
@@ -39,12 +40,12 @@ const NavBar = () => {
           Chlorine form
         </button>
       </Link>
-      <Link to={isLoggedIn ? '/' : '/login'}>
+      <Link to={isLoggedIn ? ROUTES.home : ROUTES.login}>
         <button
           className={styles.draw}
           onClick={isLoggedIn ? handleLogout : null}
         >
-          {isLoggedIn ? 'Logout' : 'Login'}
+          {isLoggedIn ? LABELS.logout : LABELS.loginForm.header}
         </button>
       </Link>
     </div>

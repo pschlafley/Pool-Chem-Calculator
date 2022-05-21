@@ -9,9 +9,10 @@ import SaltForm from './components/CalculationForms/SaltForm/SaltForm';
 import ChlorineForm from './components/CalculationForms/ChlorineForm/ChlorineForm';
 import DropDown from './components/Dropdown/dropdown';
 import Home from './components/HomePage/home-page';
-import SignUp from './components/SignUp/SignUp';
+import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 
+import { ROUTES } from './constants';
 import Auth from './utils/auth';
 
 const client = new ApolloClient({
@@ -41,12 +42,12 @@ function App() {
             </div>
           )}
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/salt-form' element={<SaltForm />} />
-            <Route path='/alkalinity-form' element={<AlkalinityForm />} />
-            <Route path='/chlorine-form' element={<ChlorineForm />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
+            <Route path={ROUTES.home} element={<Home />} />
+            <Route path={ROUTES.saltForm} element={<SaltForm />} />
+            <Route path={ROUTES.alkalinityForm} element={<AlkalinityForm />} />
+            <Route path={ROUTES.chlorineForm} element={<ChlorineForm />} />
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.register} element={<Register />} />
           </Routes>
         </>
       </div>
