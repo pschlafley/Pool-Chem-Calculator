@@ -22,9 +22,14 @@ async function startServer(typeDefs, resolvers) {
 
   await server.start();
 
+
   server.applyMiddleware({ app });
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
 
   db.once('open', async () => {
     await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
