@@ -2,17 +2,17 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    username: String!
-    firstName: String!
-    lastName: String!
-    email: String!
-    createdAt: String!
+    _id: ID
+    username: String
+    firstName: String
+    lastName: String
+    email: String
+    createdAt: String
   }
 
   type Auth {
-    token: ID!
-    user: User!
+    token: ID
+    user: User
   }
 
   type Query {
@@ -26,8 +26,8 @@ const typeDefs = gql`
       lastName: String!
       email: String!
       password: String!
-      createdAt: String!
     ): Auth
+    login(email: String, username: String, password: String!): Auth
   }
 `;
 

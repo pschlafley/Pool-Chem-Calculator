@@ -13,6 +13,9 @@ const Input = ({
   value = null,
   isFirstInput = false,
   inputOptions = [],
+  className = '',
+  isRequired = false,
+  ...restProps
 }) => {
   const inputRef = useRef(null);
 
@@ -40,7 +43,7 @@ const Input = ({
   }
 
   return (
-    <div className={styles.input}>
+    <div className={`${styles.input} ${className}`}>
       <label htmlFor={name}>{label}</label>
       <input
         name={name}
@@ -49,7 +52,8 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         ref={inputRef}
-        required
+        required={isRequired}
+        {...restProps}
       />
     </div>
   );
@@ -64,6 +68,8 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   isFirstInput: PropTypes.bool.isRequired,
   inputOptions: PropTypes.arrayOf(PropTypes.object),
+  className: PropTypes.string,
+  isRequired: PropTypes.bool,
 };
 
 export default Input;

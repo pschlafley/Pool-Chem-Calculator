@@ -26,14 +26,12 @@ async function startServer(typeDefs, resolvers) {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  // TODO - serve static assets, files, connect database
-
   db.once('open', async () => {
     await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
 
     console.log(`API server running on port ${PORT}!`);
     console.log(
-      `🚀 GraphQL server running on http://localhost:${PORT}${server.graphqlPath}`
+      `\n🚀 GraphQL server running on http://localhost:${PORT}${server.graphqlPath}\n`
     );
   });
 }

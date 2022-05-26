@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-const secret = process.env.MYSECRET || 'test123456';
-const expiration = '2h';
+const secret = process.env.MYSECRET || 'TGoTmGPqx4wE6CjqFuf8CDA';
+const expiration = '1h';
 
-function signToken({ name, _id }) {
-  const payload = { name, _id };
+function signToken({ username, _id }) {
+  const payload = { username, _id };
 
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 }

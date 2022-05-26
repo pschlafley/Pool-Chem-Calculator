@@ -10,7 +10,7 @@
 
 .container {
   composes: flexColumnCenteredItems;
-  margin-top: 10%;
+  margin-top: 100px;
 }
 
 .form {
@@ -21,12 +21,6 @@
   border: 1px solid lightgray;
   border-radius: 5px;
   background-color: lightseagreen;
-}
-
-.form:hover {
-  /* transform: rotateX(200deg); */
-  transform: rotateY(200deg);
-  transition: all 1s;
 }
 
 .form h2 {
@@ -79,6 +73,10 @@
   border-radius: 3px;
 }
 
+.firstInput {
+  margin-top: 10px;
+}
+
 .button {
   font-size: 16px;
   font-weight: bold;
@@ -96,4 +94,11 @@
 
 .button.isDisabled {
   color: gray;
+}
+
+.error {
+  margin-top: 2px;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
 }

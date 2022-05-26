@@ -39,6 +39,16 @@ export const LABELS = {
     header: 'Calculate Chlorine Needed',
     button: 'Calculate',
   },
+  registerForm: {
+    header: 'Register',
+    button: 'Submit',
+  },
+  loginForm: {
+    header: 'Login',
+    button: 'Login',
+    notRegistered: 'Not registered?',
+  },
+  logout: 'Logout',
 };
 
 export const POOL_SHAPES = {
@@ -72,4 +82,18 @@ export const CHLORINE_RESULT_MESSAGES = {
     end: 'lbs of non chlorine oxidizing shock to your pool.',
   },
   none: 'You do not need to add any chlorine.',
+};
+
+export const INPUT_TYPES = {
+  text: 'text',
+  password: 'password',
+};
+
+export const ROUTES = {
+  home: '/',
+  register: '/register',
+  login: '/login',
+  saltForm: '/salt-form',
+  alkalinityForm: '/alkalinity-form',
+  chlorineForm: '/chlorine-form',
 };
