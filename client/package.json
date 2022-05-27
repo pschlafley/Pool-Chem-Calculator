@@ -20,7 +20,8 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-device-detect": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,8 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-device-detect": "^2.1.2"
   }
 }
