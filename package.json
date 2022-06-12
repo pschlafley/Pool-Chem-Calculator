@@ -29,7 +29,7 @@
     "prettier": "^2.5.1"
   },
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "dependencies": {
     "if-env": "^1.0.4"
