@@ -9,7 +9,8 @@
     "start:dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "test": "cd client && npm run test",
     "lint": "npx eslint client/src",
-    "heroku-postbuild": "cd client && npm install react-scripts && npm run build"
+    "heroku-prebuild": "npm install react-scripts",
+    "heroku-postbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
