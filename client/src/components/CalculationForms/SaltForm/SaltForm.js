@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import Form from '../../Form/Form';
-import Input from '../../Form/Input';
-import Button from '../../Form/Button';
+import Form from '../../Form/Form.js';
+import Input from '../../Form/Input.js';
+import Button from '../../Form/Button.js';
 
-import { calculatePoolSalt } from '../../../calculations/pool-salt';
-import { CHEMICALS, LABELS } from '../../../constants';
+import { calculatePoolSalt } from '../../../calculations/pool-salt.js';
+import { CHEMICALS, LABELS } from '../../../constants.js';
 
 const initialValues = {
   gallons: '',

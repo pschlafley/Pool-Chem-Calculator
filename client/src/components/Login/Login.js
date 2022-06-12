@@ -12,7 +12,7 @@ import { LABELS, INPUT_TYPES, ROUTES } from '../../constants';
 import { INPUTS, initialValues, schema } from './loginConfig';
 
 import { LOGIN_USER } from '../../graphql/mutations';
-import Auth from '../../utils/auth';
+import Auth from '../../utils/auth.js';
 
 import styles from '../Form/Form.module.css';
 import loginStyles from './Login.module.css';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LABELS, ROUTES } from '../../constants';
+import { LABELS, ROUTES } from '../../constants.js';
 
-import Auth from '../../utils/auth';
+import Auth from '../../utils/auth.js';
 
 import styles from './Nav.module.css';
 

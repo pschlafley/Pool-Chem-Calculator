@@ -3,17 +3,17 @@ import { isMobile } from 'react-device-detect';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import './index.css';
-import NavBar from './components/Nav/navbar';
-import AlkalinityForm from './components/CalculationForms/AlkalinityForm/AlkalinityForm';
-import SaltForm from './components/CalculationForms/SaltForm/SaltForm';
-import ChlorineForm from './components/CalculationForms/ChlorineForm/ChlorineForm';
-import DropDown from './components/Dropdown/dropdown';
-import Home from './components/HomePage/home-page';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
+import NavBar from './components/Nav/navbar.js';
+import AlkalinityForm from './components/CalculationForms/AlkalinityForm/AlkalinityForm.js';
+import SaltForm from './components/CalculationForms/SaltForm/SaltForm.js';
+import ChlorineForm from './components/CalculationForms/ChlorineForm/ChlorineForm.js';
+import DropDown from './components/Dropdown/dropdown.js';
+import Home from './components/HomePage/home-page.js';
+import Register from './components/Register/Register.js';
+import Login from './components/Login/Login.js';
 
-import { ROUTES } from './constants';
-import Auth from './utils/auth';
+import { ROUTES } from './constants.js';
+import Auth from './utils/auth.js';
 
 const client = new ApolloClient({
   uri: '/graphql',

@@ -3,14 +3,14 @@ import { Formik } from 'formik';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
-import Form from '../Form/Form';
-import Input from '../Form/Input';
-import Button from '../Form/Button';
+import Form from '../Form/Form.js';
+import Input from '../Form/Input.js';
+import Button from '../Form/Button.js';
 
-import { LABELS, INPUT_TYPES } from '../../constants';
-import { CREATE_USER } from '../../graphql/mutations';
-import { INPUTS, initialValues, schema } from './registerConfig';
-import Auth from '../../utils/auth';
+import { LABELS, INPUT_TYPES } from '../../constants.js';
+import { CREATE_USER } from '../../graphql/mutations.js';
+import { INPUTS, initialValues, schema } from './registerConfig.js';
+import Auth from '../../utils/auth.js';
 
 import styles from '../Form/Form.module.css';
 

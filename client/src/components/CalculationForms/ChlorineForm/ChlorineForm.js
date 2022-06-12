@@ -2,17 +2,17 @@ import React, { useReducer } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import Form from '../../Form/Form';
-import Input from '../../Form/Input';
-import Button from '../../Form/Button';
+import Form from '../../Form/Form.js';
+import Input from '../../Form/Input.js';
+import Button from '../../Form/Button.js';
 
-import { calculateChlorine } from '../../../calculations/pool-chlorine';
+import { calculateChlorine } from '../../../calculations/pool-chlorine.js';
 import {
   LABELS,
   CHLORINE_TYPES,
   CHLORINE_RESULT_MESSAGES,
   CHEMICALS,
-} from '../../../constants';
+} from '../../../constants.js';
 
 const INPUTS = [
   {
@@ -110,9 +110,9 @@ const ChlorineForm = () => {
     return !message && !value
       ? null
       : {
-          message: `${start} ${value} ${end}`,
-          subMessage: message?.subMessage,
-        };
+        message: `${start} ${value} ${end}`,
+        subMessage: message?.subMessage,
+      };
   };
 
   const result = getResultMessage(

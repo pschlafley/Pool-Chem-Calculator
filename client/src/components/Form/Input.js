@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import Select from './Select';
+import Select from './Select.js';
 
 import styles from './Form.module.css';
 

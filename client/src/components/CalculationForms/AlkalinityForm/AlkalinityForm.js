@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import Form from '../../Form/Form';
-import Input from '../../Form/Input';
-import Button from '../../Form/Button';
+import Form from '../../Form/Form.js';
+import Input from '../../Form/Input.js';
+import Button from '../../Form/Button.js';
 
-import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity';
-import { UNITS, CHEMICALS, LABELS } from '../../../constants';
+import { calculateTotalAlkalinity } from '../../../calculations/pool-alkalinity.js';
+import { UNITS, CHEMICALS, LABELS } from '../../../constants.js';
 
 const initialState = {
   chemical: null,
@@ -48,8 +48,8 @@ const AlkalinityForm = () => {
     const unit = !doesNeedAcid
       ? UNITS.pounds
       : quarts
-      ? UNITS.quarts
-      : UNITS.fluidOunce;
+        ? UNITS.quarts
+        : UNITS.fluidOunce;
 
     const formattedResult = quarts
       ? `${Number((Math.abs(amountNeeded) / 32).toFixed(1))} ${unit}`
@@ -70,7 +70,7 @@ const AlkalinityForm = () => {
       onSubmit={(values, { resetForm }) =>
         handleCalculateAlk(values, resetForm)
       }
-    >
+    >.js
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <Form
           onFormSubmit={handleSubmit}
