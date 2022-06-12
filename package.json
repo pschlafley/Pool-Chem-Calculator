@@ -4,13 +4,13 @@
   "description": "Calculator that calculates pool water chemistry based off values in a form",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm run start:prod",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "test": "cd client && npm run test",
     "lint": "npx eslint client/src",
-    "heroku-prebuild": "npm install",
-    "heroku-postbuild": "concurrently \"cd client && npm install\" \"cd server && npm install\" cd client && npm run build"
+    "heroku-prebuild": "npm install && cd client && npm install",
+    "heroku-postbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
