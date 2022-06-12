@@ -9,7 +9,7 @@
     "start:dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "test": "cd client && npm run test",
     "lint": "npx eslint client/src",
-    "build": "cd client && && npm install react-scripts && npm run build"
+    "build": "cd client && npm install react-scripts && npm run build"
   },
   "repository": {
     "type": "git",
