@@ -10,7 +10,8 @@
     "test": "cd client && npm run test",
     "lint": "npx eslint client/src",
     "heroku-prebuild": "cd client && npm install",
-    "heroku-postbuild": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd server && npm run start"
   },
   "repository": {
     "type": "git",
