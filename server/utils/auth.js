@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import process from 'process';
 
 const secret = process.env.MYSECRET || 'TGoTmGPqx4wE6CjqFuf8CDA';
 const expiration = '1h';
