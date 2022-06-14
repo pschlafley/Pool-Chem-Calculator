@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import express from 'express';
 import http from 'http';
+import process from 'process';
 
 import { typeDefs, resolvers } from './schema/index.js';
 import db from './config/connection.js';
@@ -21,7 +22,6 @@ async function startServer(typeDefs, resolvers) {
   });
 
   await server.start();
-
 
   server.applyMiddleware({ app });
   app.use(express.urlencoded({ extended: false }));

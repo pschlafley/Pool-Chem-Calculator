@@ -48,8 +48,8 @@ const AlkalinityForm = () => {
     const unit = !doesNeedAcid
       ? UNITS.pounds
       : quarts
-        ? UNITS.quarts
-        : UNITS.fluidOunce;
+      ? UNITS.quarts
+      : UNITS.fluidOunce;
 
     const formattedResult = quarts
       ? `${Number((Math.abs(amountNeeded) / 32).toFixed(1))} ${unit}`
@@ -70,7 +70,7 @@ const AlkalinityForm = () => {
       onSubmit={(values, { resetForm }) =>
         handleCalculateAlk(values, resetForm)
       }
-    >.js
+    >
       {({ handleChange, handleSubmit, dirty, isValid, values }) => (
         <Form
           onFormSubmit={handleSubmit}
